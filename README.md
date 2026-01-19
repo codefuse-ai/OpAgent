@@ -19,12 +19,14 @@
 
 The script supports two different result directory structures:
 
-### 1. Subdirectory Structure (final_visual_results)
+### 1. Subdirectory Structure (final_visual_results with step-wise screenshots in images)
 ```
 final_visual_results/
 ├── val_0/
+│   └── images
 │   └── trajectory.json
 ├── val_1/
+│   └── images
 │   └── trajectory.json
 └── ...
 ```
