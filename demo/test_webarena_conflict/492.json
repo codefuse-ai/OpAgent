@@ -1,0 +1,35 @@
+{
+  "sites": [
+    "shopping_admin"
+  ],
+  "task_id": 492,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_admin_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin",
+  "geolocation": null,
+  "intent_template": "Notify {{name}} in their most recent pending order with message \"{{message}}\"",
+  "instantiation_dict": {
+    "name": "Jane Doe",
+    "message": "sorry we are out of stock, please reorder"
+  },
+  "intent": "Notify Jane Doe in their most recent pending order with message \"sorry we are out of stock, please reorder\"",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "",
+    "program_html": [
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/sales/order/view/order_id/302/",
+        "locator": "document.querySelector(\"#order_history_block\").querySelector(\".note-list\").firstElementChild.querySelector(\".note-list-comment\").outerText",
+        "required_contents": {
+          "exact_match": "sorry we are out of stock, please reorder"
+        }
+      }
+    ]
+  },
+  "intent_template_id": 280,
+  "conflict_key": "SHOP_ADMIN-W-ORDER_COMMENT-Jane_Doe_pending"
+}

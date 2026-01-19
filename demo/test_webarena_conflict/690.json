@@ -1,0 +1,39 @@
+{
+  "sites": [
+    "shopping"
+  ],
+  "task_id": 690,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7770",
+  "geolocation": null,
+  "intent_template": "Draft an email to the shop owner via their contact us function for a coupon as {{reason}}",
+  "instantiation_dict": {
+    "reason": "they promised me a coupon last time"
+  },
+  "intent": "Draft an email to the shop owner via their contact us function for a coupon as they promised me a coupon last time",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "url_match",
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "http://REPLACE_WITH_YOUR_HOST:7770/contact",
+    "program_html": [
+      {
+        "url": "last",
+        "locator": "document.querySelector('[title=\"What’s on your mind?\"').value",
+        "required_contents": {
+          "must_include": [
+            "coupon",
+            "promised"
+          ]
+        }
+      }
+    ],
+    "url_note": "GOLD in PRED"
+  },
+  "intent_template_id": 163,
+  "conflict_key": "SHOP-W-CONTACT_FORM-draft_coupon"
+}

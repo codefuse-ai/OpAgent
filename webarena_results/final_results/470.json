@@ -1,0 +1,679 @@
+[
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_0.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          46,
+          175
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to cancel order 302.",
+        "Currently, I am on the Dashboard page.",
+        "I checked the 'Last Orders' section on the Dashboard, but order 302 is not visible there.",
+        "To find and cancel the order, I need to navigate to the Order Management section.",
+        "The standard path in Adobe Commerce is 'Sales' > 'Orders' on the sidebar.",
+        "Therefore, the next logical step is to click on the 'Sales' menu item in the left sidebar.",
+        "The task is not yet completed."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. According to the 'Adobe Commerce Admin Operation Expert Strategy', the path to manage orders is 'Sales -> Orders'. Currently, I am on the Dashboard. I need to navigate to the Sales section first. I will click the 'Sales' menu item in the left sidebar.",
+      "instruction": "Click the 'Sales' menu item on the left sidebar",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          46,
+          175
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/admin/dashboard/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_1.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          220,
+          113
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The previous action successfully opened the 'Sales' menu in the sidebar.",
+        "The current page displays the 'Sales' submenu with options like 'Orders', 'Invoices', etc.",
+        "To cancel order 302, the next logical step is to navigate to the 'Orders' grid.",
+        "The task is not yet complete as the order has not been located or cancelled.",
+        "I will record the navigation progress."
+      ],
+      "mark_node": true,
+      "note": "Navigation: Opened 'Sales' menu. Next step is to click 'Orders'.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. According to the expert strategy, the path to manage orders is 'Sales -> Orders'. The screenshot shows the 'Sales' menu is already expanded in the left sidebar. I need to click the 'Orders' link within this menu to proceed to the order list page.",
+      "instruction": "Click the 'Orders' link in the left sidebar menu under 'Sales'.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          220,
+          113
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_2.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "302",
+        "press_enter": true,
+        "coords": [
+          343,
+          264
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The agent has successfully navigated to the 'Sales > Orders' page.",
+        "The current page displays a list of orders, but the specific order requested by the user (Order #302) is not visible in the current viewport (the most recent visible order is #000000299).",
+        "To proceed with cancelling the order, the agent first needs to locate it.",
+        "The most efficient way to find the order is to use the 'Search by keyword' input box at the top left of the grid.",
+        "Therefore, the task is not yet done. The next step should be to input '302' into the search box and search."
+      ],
+      "mark_node": true,
+      "note": "Navigated to Sales > Orders page. Order #302 is not visible in the current list. Need to search for the order ID to proceed with cancellation.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. I am currently on the Orders page. The most efficient way to find a specific order by ID is to use the search bar. I see a 'Search by keyword' input field at the top of the order list. I will type '302' into this field and press Enter to filter the results.",
+      "instruction": "Type \"302\" into the \"Search by keyword\" input field.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "302",
+        "press_enter": true,
+        "coords": [
+          343,
+          264
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "type",
+      "arguments": {
+        "coords": [
+          343,
+          264
+        ],
+        "content": "302",
+        "press_enter_after": 0
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_3.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          941,
+          265
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The previous action was searching for '302', which resulted in '0 records found'.",
+        "This suggests that '302' might not be a sufficient keyword, possibly because Magento order IDs often have leading zeros (e.g., 000000302).",
+        "The task is not complete as the order has not been located or cancelled.",
+        "The next logical step is to clear the current 'Keyword: 302' filter to reset the list, and then try searching for the full ID '000000302' to see if that yields a result."
+      ],
+      "mark_node": true,
+      "note": "Search for keyword '302' returned 0 results. The order ID is likely '000000302' (standard Magento format). Need to clear filters and retry search with the full ID.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. I have searched for '302' using the general keyword search, but the result shows '0 records found'. To ensure I can find the order, I should try using the specific 'Filters' menu to search by the exact Order ID, as the general keyword search might be failing or expecting a different format. Therefore, I will click the 'Filters' button to open the advanced filter options.",
+      "instruction": "Click the 'Filters' button located to the right of the search bar.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          941,
+          265
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_4.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          1366,
+          312
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to cancel order 302.",
+        "The agent searched for '302' in the keyword search box, which returned '0 records found'. This is likely because the system expects the full increment ID (e.g., '000000302') or the search should be done via the specific 'ID' column filter.",
+        "The previous action (Step 4) attempted to click 'Clear all' to remove the failed filter, but the current screenshot (Image 2) shows the 'Keyword: 302' filter is still active. The click might have been missed or the page didn't update.",
+        "The 'Filters' drawer is currently expanded, showing fields like 'ID', 'Grand Total', etc.",
+        "To proceed, the agent must first successfully clear the 'Keyword: 302' filter to avoid conflicting search criteria.",
+        "I suggest clicking the 'x' icon on the 'Keyword: 302' filter chip (approx coordinates [220, 255]) as a more direct way to remove it.",
+        "After clearing the filter, the agent should search again using the full ID '000000302' in the main search box or input '302' in the 'ID' field of the expanded filter drawer."
+      ],
+      "mark_node": true,
+      "note": "Search for '302' returned 0 results. The 'Keyword: 302' filter is still active. Need to clear this filter (click the 'x' icon) and then retry searching with the full ID '000000302' or using the specific ID column filter.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. The previous search using the general 'Keyword' search box for '302' returned '0 records found'. This suggests the keyword search might not be effectively matching the Order ID, or the current filter is too restrictive. To fix this, I should try filtering specifically by the 'ID' column. However, since the current 'Keyword: 302' filter is active and blocking any results (intersection of sets), I must first clear the existing filters to reset the view. After clearing, I will be able to use the specific 'ID' input field to find the order.",
+      "instruction": "Click the 'Clear all' link located on the right side of the 'Active filters' row.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1366,
+          312
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_5.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "302",
+        "press_enter": true,
+        "coords": [
+          344,
+          265
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The 'Clear all' action was executed successfully, and the order grid has been reset.",
+        "The grid now displays 308 records, confirming that the previous restrictive filters are removed.",
+        "The target order '302' is not visible in the current first page of results (visible IDs include 000000299, 000000065, etc.).",
+        "Based on the visible ID format (9 digits, zero-padded), the target order ID is almost certainly '000000302'.",
+        "Since the previous keyword search for '302' returned 0 results, the system likely requires the full ID or does not support partial matching for this field in the keyword search.",
+        "The next step should be to search for the full ID '000000302' in the search box to locate the specific order."
+      ],
+      "mark_node": true,
+      "note": "Filters cleared successfully, resetting the list to 308 records. Order #302 is not in the current view. The ID format is confirmed to be 9 digits (e.g., 000000299). Next step is to search for the full ID '000000302'.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. Currently, the order list displays other orders, so I need to find order 302 first. The most direct way is to use the 'Search by keyword' box at the top left of the page. I will type '302' into this search box and press Enter to filter the list.",
+      "instruction": "Type '302' into the 'Search by keyword' input field at the top left of the page.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "302",
+        "press_enter": true,
+        "coords": [
+          344,
+          265
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "type",
+      "arguments": {
+        "coords": [
+          344,
+          265
+        ],
+        "content": "302",
+        "press_enter_after": 0
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_6.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          1251,
+          670
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The current page shows '0 records found' with the active filter 'Keyword: 302'.",
+        "This confirms that searching for the short ID '302' does not work, likely because Magento stores order IDs as 9-digit numbers (e.g., 000000302) and the keyword search requires an exact match or the full ID.",
+        "The previous hypothesis about the ID format (000000xxx) is reinforced by the visible IDs in the previous step (e.g., 000000299).",
+        "To proceed, the current 'Keyword: 302' filter must be cleared to reset the list.",
+        "Then, a new search must be performed using the full ID '000000302'. Using the specific 'ID' column filter (the input box directly under the 'ID' header) is often more precise than the global keyword search.",
+        "The task is not finished as the order has not been found or cancelled."
+      ],
+      "mark_node": true,
+      "note": "Search for '302' failed (0 results). Confirmed ID format requires padding (e.g., 000000302). Next steps: 1. Click 'Clear all' to remove the 'Keyword: 302' filter. 2. Search for '000000302' in the global search or the ID column filter.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The previous search for '302' using the general keyword search resulted in 0 records found. To ensure I can find the order, I should try searching specifically using the 'ID' filter field. However, the current 'Keyword: 302' filter is still active and blocking results. I need to clear the existing filters first before applying the specific ID filter.",
+      "instruction": "Click the 'Clear all' link located above the filter fields on the right side to reset the search filters.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1251,
+          670
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_7.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          941,
+          265
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The previous attempt to search for '302' using the main search bar resulted in '0 records found'.",
+        "The 'Keyword: 302' filter is currently active and preventing any orders from being shown.",
+        "The specific 'ID' filter field in the expanded filter section is empty.",
+        "To find the order, I must first clear the ineffective 'Keyword: 302' filter.",
+        "After clearing, I should use the specific 'ID' column filter to search for '302' or '000000302', which is more reliable than the general keyword search.",
+        "Therefore, the immediate next step is to click 'Clear all' to reset the view."
+      ],
+      "mark_node": true,
+      "note": "Search for '302' via the main keyword search failed (0 results). The 'Keyword: 302' filter is active and needs to be cleared. Next steps: 1. Click 'Clear all'. 2. Input '302' into the specific 'ID' filter field (not the top search bar). 3. Click 'Apply Filters'.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. I have already searched for '302' using the general keyword search, but the result shows '0 records found'. This might be because the keyword search does not strictly target the Order ID or there is a mismatch. To ensure I can find the order if it exists, I should use the specific 'Filters' menu to search by the 'ID' field directly, which is more reliable. Therefore, the next step is to click the 'Filters' button to reveal the advanced filter fields.",
+      "instruction": "Click the 'Filters' button located to the right of the search bar to expand the filter options.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          941,
+          265
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_8.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          1366,
+          312
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to cancel order 302.",
+        "The current page shows '0 records found' with an active filter 'Keyword: 302'.",
+        "The previous attempt to click 'Clear all' (Step 8) appears to have not successfully removed the filter, or the page state in the screenshot still reflects the active filter.",
+        "The 'Filters' section is currently expanded, revealing the specific column filters including 'ID'.",
+        "The general keyword search for '302' is ineffective. To find the order, the agent must use the specific 'ID' filter column.",
+        "The 'Keyword: 302' filter must be removed first to avoid conflicting logic (e.g., searching for ID 302 AND Keyword 302, where Keyword 302 already returns 0).",
+        "The next logical steps are to remove the 'Keyword: 302' filter (by clicking the 'x' on the chip or 'Clear all' again) and then input '302' (or '000000302') into the 'ID' filter field and apply filters."
+      ],
+      "mark_node": true,
+      "note": "Current Status: Search for '302' returned 0 results. 'Keyword: 302' filter is active. Filter options are expanded. \nActionable Insight: The general keyword search is ineffective. Must clear the 'Keyword: 302' filter and use the specific 'ID' filter field with value '302' or '000000302'.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The current search for '302' using the general keyword search resulted in '0 records found'. To correctly find order 302, I should use the specific 'ID' filter field. However, the current 'Keyword: 302' filter is active and might interfere. I need to clear the existing filters first before applying the specific ID filter.",
+      "instruction": "Click the 'Clear all' link located above the filter grid on the right side to reset the search filters.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1366,
+          312
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_9.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "302",
+        "press_enter": true,
+        "coords": [
+          262,
+          488
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The previous action 'Clear all' was successful. The 'Active filters' section has disappeared, and the record count has reset to '308 records found'.",
+        "The specific filter fields are visible, including the 'ID' field.",
+        "Order 302 is not currently visible in the list (visible IDs are 000000299, 000000065, etc.).",
+        "To find order 302, the agent must now use the specific 'ID' filter field rather than the general keyword search which failed previously.",
+        "The next logical steps are to type '302' into the 'ID' filter input box and then click 'Apply Filters'."
+      ],
+      "mark_node": true,
+      "note": "Filters successfully cleared. The order list is reset to 308 records. The specific 'ID' filter field is empty and ready for input. Next step: Input '302' into the 'ID' filter field and apply filters.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. I am on the Orders page. I see a filter section with an 'ID' field. To find the specific order quickly, I should use this filter. I will type '302' into the 'ID' input field.",
+      "instruction": "Type \"302\" into the \"ID\" filter input field.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "302",
+        "press_enter": true,
+        "coords": [
+          262,
+          488
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "type",
+      "arguments": {
+        "coords": [
+          262,
+          488
+        ],
+        "content": "302",
+        "press_enter_after": 0
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_10.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          1082,
+          909
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "Step 10 (Type '302' into ID filter and press Enter) was successful.",
+        "The page has updated to show '1 records found'.",
+        "The order grid now displays Order ID '000000302' with Status 'Pending'.",
+        "The user's goal is to 'Cancel order 302'. The order is found but not yet cancelled.",
+        "The next logical step is to access the order details to perform the cancellation. This can be done by clicking the 'View' link in the 'Action' column for the row with ID 000000302.",
+        "Alternatively, one could select the checkbox and use the 'Actions' dropdown, but viewing the order is a safer and more standard verification step before cancellation."
+      ],
+      "mark_node": true,
+      "note": "Order 302 (000000302) successfully found using the ID filter. Status is 'Pending'. Next step is to open the order details to cancel it.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. I have successfully filtered the orders list for ID '302', and the result '000000302' is displayed in the grid with a status of 'Pending'. To perform the cancellation, I need to access the order details page. I see a 'View' link in the 'Action' column corresponding to this order. Therefore, the next step is to click this 'View' link.",
+      "instruction": "Click the 'View' link in the Action column for the order with ID 000000302.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1082,
+          909
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/view/order_id/302/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_11.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          756,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The previous action (Step 11) was a click operation. Based on the transition from the Order Grid (Image 1) to the Order View page (Image 2), this action successfully clicked the 'View' link for Order #000000302.",
+        "The current page is the Order View page for Order #000000302. The order status is displayed as 'Pending'.",
+        "The user's goal is to cancel this order. I have located the 'Cancel' button in the top action menu (positioned between 'Login as Customer' and 'Send Email').",
+        "The task is not yet complete. The next step is to click the 'Cancel' button to initiate the cancellation process. This will likely require handling a confirmation dialog in the subsequent step.",
+        "I will mark this node to record that we have successfully accessed the order details and identified the cancellation option."
+      ],
+      "mark_node": true,
+      "note": "Accessed Order #000000302 details page. Current Status: Pending. 'Cancel' button is visible in the top action menu. Ready to execute cancellation.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. The current page shows the details for order #000000302. There is a 'Cancel' button in the top action bar. I should click this button to proceed with the cancellation.",
+      "instruction": "Click the 'Cancel' button in the top action bar.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          756,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/view/order_id/302/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_12.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          912,
+          159
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to cancel order 302.",
+        "In the previous step (Step 12), the agent clicked the 'Cancel' button on the Order #000000302 details page.",
+        "The current page screenshot shows a modal popup asking 'Are you sure you want to cancel this order?' with 'Cancel' and 'OK' buttons.",
+        "This confirms the 'Cancel' action was initiated successfully.",
+        "To complete the task, the agent must click the 'OK' button on the popup to finalize the cancellation.",
+        "The task is not yet complete as the order is not yet canceled (still in 'Pending' status behind the popup).",
+        "I will mark this node to record the progress."
+      ],
+      "mark_node": true,
+      "note": "Initiated cancellation for Order #000000302. A confirmation popup appeared. Next step is to click 'OK' to confirm the cancellation.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to cancel order 302. The current page shows a confirmation modal with the text 'Are you sure you want to cancel this order?'. To proceed with the cancellation, I need to confirm this action. The modal provides an 'OK' button to confirm. Therefore, the next step is to click the 'OK' button inside the modal window.",
+      "instruction": "Click the 'OK' button in the confirmation pop-up window.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          912,
+          159
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/sales/order/view/order_id/302/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_13.png"
+  },
+  {
+    "type": "generated_answer",
+    "generated_final_answer": "<|im_start|>assistant\n<answer>Order #000000302 has been successfully canceled.</answer>\n<|im_end|>"
+  },
+  {
+    "configs": {
+      "sites": [
+        "shopping_admin"
+      ],
+      "task_id": 470,
+      "require_login": true,
+      "storage_state": "./.auth/shopping_admin_state.json",
+      "start_url": "http://ecs_ip:7780/admin",
+      "geolocation": null,
+      "intent_template": "Cancel order {{id}}",
+      "instantiation_dict": {
+        "id": "302"
+      },
+      "intent": "Cancel order 302",
+      "require_reset": false,
+      "eval": {
+        "eval_types": [
+          "program_html"
+        ],
+        "reference_answers": null,
+        "reference_url": "",
+        "program_html": [
+          {
+            "url": "http://ecs_ip:7780/admin/sales/order/view/order_id/302/",
+            "locator": "document.querySelector(\"#order_status\").outerText",
+            "required_contents": {
+              "exact_match": "Canceled"
+            }
+          }
+        ]
+      },
+      "intent_template_id": 257,
+      "conflict_key": "SHOP_ADMIN-W-ORDER-302"
+    }
+  },
+  {
+    "type": "evaluation",
+    "score": 1.0
+  }
+]

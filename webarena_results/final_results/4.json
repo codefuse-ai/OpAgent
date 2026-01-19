@@ -1,0 +1,1270 @@
+[
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_0.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          43,
+          481
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products specifically for 'Jan 2023'.",
+        "The current page is the 'Dashboard'. While it shows a 'Bestsellers' tab, there is no visible date filter to restrict the data to January 2023.",
+        "The data currently displayed is likely 'Lifetime' or based on a default recent period, which does not satisfy the specific date requirement.",
+        "To get the correct data, the agent must navigate to the dedicated Reports section where date filtering is available.",
+        "The next logical step is to click on 'Reports' in the left sidebar to access 'Products > Bestsellers'."
+      ],
+      "mark_node": false,
+      "note": "Current dashboard data is not filtered by the requested date (Jan 2023), so it is not recorded.",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products for January 2023. According to the 'Adobe Commerce Admin Operation Expert Strategy', the path to the Bestsellers report is 'Reports -> Products -> Bestsellers'. I am currently on the Dashboard. The first step is to navigate to the Reports section. I see the 'REPORTS' menu item in the left sidebar. I will instruct the grounder to click it to reveal the sub-menu.",
+      "instruction": "Click the 'REPORTS' menu item in the left sidebar.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          43,
+          481
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/admin/dashboard/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_1.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          739,
+          443
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products in Jan 2023.",
+        "The agent successfully clicked the 'Reports' icon in the sidebar, opening the Reports menu overlay.",
+        "I can see the 'Bestsellers' link under the 'Products' section in the menu.",
+        "The next step is to click on 'Bestsellers' to navigate to the report page.",
+        "Once on the report page, I will need to filter by the date 'Jan 2023' to get the specific data.",
+        "Currently, no product data is visible, so I cannot record any notes yet."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products in Jan 2023. According to the 'Adobe Commerce Admin Operation Expert Strategy', the path to view bestsellers is 'Reports -> Products -> Bestsellers'. The current screenshot shows that the 'Reports' menu is already open. I can clearly see the 'Bestsellers' link under the 'Products' section in this menu. Therefore, the next logical step is to click on 'Bestsellers' to navigate to the report page.",
+      "instruction": "Click the 'Bestsellers' link under the 'Products' section in the Reports menu.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          739,
+          443
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_2.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "select_option",
+      "params": {
+        "option": "Month",
+        "coords": [
+          531,
+          450
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The agent has successfully navigated to the 'Bestsellers Report' page.",
+        "The current report displays '0 records found' and 'We couldn't find any records', indicating that no data is currently loaded or the default filter doesn't match the request.",
+        "To find the top-3 best-selling products for 'Jan 2023', the agent needs to apply specific filters.",
+        "Suggested next steps for the Planner:",
+        "1. Change the 'Period' dropdown from 'Day' to 'Month'. This will aggregate the sales data by month, making it easier to rank products for the whole month of January.",
+        "2. Set the 'From' date field to '01/01/2023'.",
+        "3. Set the 'To' date field to '01/31/2023'.",
+        "4. Click the 'Show Report' button (orange button at the top right) to load the data.",
+        "Once the report is generated, the agent will need to identify the top 3 products based on 'Order Quantity' or sales volume."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the best-selling products for January 2023. According to the 'Adobe Commerce Admin Operation Expert Strategy', for a single month query, it is efficient to use the 'Month' selection for the 'Period' field to aggregate the data. Currently, the 'Period' is set to 'Day'. Therefore, the first step is to change the 'Period' dropdown to 'Month'. After this, I will proceed to input the dates '01/01/23' and '01/31/23' into the 'From' and 'To' fields respectively, as per the strategy's date format recommendation.",
+      "instruction": "Click the 'Period' dropdown menu to select 'Month'.",
+      "action_type": "select_option",
+      "action_attributes": {
+        "option": "Month",
+        "coords": [
+          531,
+          450
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          531,
+          450
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_3.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          498,
+          498
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for Jan 2023.",
+        "The agent is on the 'Bestsellers Report' page.",
+        "The previous action was selecting 'Month' from the Period dropdown. The screenshot shows the dropdown menu is active.",
+        "The 'From' and 'To' date fields are currently empty.",
+        "No report data is generated yet ('We couldn't find any records.').",
+        "To get the data, the agent needs to input the date range for January 2023 (e.g., From: 1/1/2023, To: 1/31/2023) and then click the 'Show Report' button.",
+        "The task is not finished."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to query the best-selling products for January 2023. The current page is the 'Bestsellers Report'. The 'Period' is correctly set to 'Month', but the dropdown menu appears to be open, potentially obscuring the 'From' field. To ensure the dropdown is closed and to avoid accidental clicks, I will first fill in the 'To' field, which is clearly visible and unobstructed below the 'From' field. According to the expert strategy, the date format should be 'MM/DD/YY'. Therefore, I will type the end date '01/31/23' into the 'To' field first.",
+      "instruction": "Type \"01/31/23\" into the \"To\" input field next to the calendar icon.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          498,
+          498
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          498,
+          498
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_4.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          522,
+          578
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for Jan 2023.",
+        "The current page is the 'Bestsellers Report'.",
+        "The 'Period' is correctly set to 'Month'.",
+        "The 'From' date is set to '01/31/23'.",
+        "The 'To' date field is marked as required (red asterisk) but is currently empty.",
+        "The report table shows '0 records found' because the filter is incomplete and the report hasn't been generated yet.",
+        "To proceed, the 'To' field must be filled. Setting it to '01/31/23' will define the range covering January 2023 (since the aggregation period is Month).",
+        "After filling the date, the 'Show Report' button must be clicked.",
+        "Therefore, the task is not done. The next steps should be to input the 'To' date and then generate the report."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants the best-selling products for Jan 2023. The 'Period' is set to 'Month'. The 'From' date is currently '01/31/23'. According to the expert strategy, the 'To' date must also be filled. To ensure the report covers January 2023, I will set the 'To' date to '01/31/23'. Even if the range is just one day, since the period is 'Month', it should display the data for the month containing that date. Therefore, the next step is to fill in the 'To' field.",
+      "instruction": "Type '01/31/23' into the 'To' date input field.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          522,
+          578
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          522,
+          578
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_5.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products for January 2023.",
+        "The agent has successfully navigated to the 'Bestsellers Report' page.",
+        "The agent has set the 'Period' to 'Month'.",
+        "The agent has entered '01/31/23' for both the 'From' and 'To' dates. While '01/01/23' to '01/31/23' is a more standard range for a full month, '01/31/23' with a 'Month' period might suffice if the system aggregates by the month containing the date. However, the report has not been generated yet.",
+        "The current page shows '0 records found', which is likely because the 'Show Report' button has not been clicked after entering the filter criteria.",
+        "The task is not complete because no product data is visible.",
+        "The next logical step is to click the 'Show Report' button to apply the filters and generate the list.",
+        "If clicking 'Show Report' still yields no results, the agent should consider refreshing the statistics (as suggested by the yellow banner) or adjusting the 'From' date to '01/01/23'."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants the best-selling products for January 2023. The current 'From' date is set to '01/31/23' and 'To' is '01/31/23'. To ensure the report covers the entire month's sales data rather than just the last day, I need to correct the 'From' date to '01/01/23'. After this correction, I will generate the report.",
+      "instruction": "Type \"01/01/23\" into the \"From\" date input field.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0wMSUyRjMxJTJGMjMmdG89MDElMkYzMSUyRjIzJnNob3dfZW1wdHlfcm93cz0w/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_6.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1325,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the best-selling products for Jan 2023.",
+        "Current page is 'Bestsellers Report'.",
+        "The 'From' date filter currently shows '01/31/23', which is incorrect. It should be '01/01/23' to cover the full month.",
+        "The 'To' date filter shows '01/31/23', which is correct.",
+        "The previous action (Step 6) typed '01/01/23' but the coordinates [1326, 179] indicate it interacted with the header search bar (visible in the screenshot as an open search dropdown) instead of the 'From' date field.",
+        "The report table currently shows 'We couldn't find any records', likely due to the incorrect date range or the report not being refreshed.",
+        "The next steps should be to correctly input '01/01/23' into the 'From' field and then click the 'Show Report' button to retrieve the data."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants the bestsellers for Jan 2023. The current 'From' date in the filter is '1/31/23', which is incorrect (it should be the start of the month). The 'To' date is '1/31/23', which is correct. The previous attempt to type '01/01/23' (Step 6) seemingly went into the global search bar at the top right instead of the filter field. I need to correct the 'From' date to '01/01/23' to cover the full month of January.",
+      "instruction": "Type '01/01/23' into the 'From' date input field in the Filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1325,
+          179
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1325,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_7.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1374,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for Jan 2023.",
+        "The current page is the 'Bestsellers Report'.",
+        "The 'From' date filter currently shows '1/31/23', which is incorrect for the full month of January. It should be '01/01/23'.",
+        "The 'To' date filter shows '1/31/23', which is correct.",
+        "The previous actions (Step 6 & 7) typed '01/01/23' into the global search box (top right, coordinates [1326, 179]) instead of the 'From' date filter field.",
+        "Because of the incorrect date range (From 1/31 to 1/31), the report shows 'We couldn't find any records.'",
+        "The agent needs to correct the 'From' date to '01/01/23' in the correct input field (labeled 'From *') and then click the orange 'Show Report' button to generate the data.",
+        "The task is not finished as no data has been retrieved yet."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to view the bestsellers report for January 2023. The current page is the 'Bestsellers Report'. The 'From' date field currently shows '1/31/23', which is incorrect for capturing the entire month. It should be '01/01/23'. The 'To' field shows '1/31/23', which is correct. The global search box at the top right is active, which is irrelevant to the report filter. I need to correct the 'From' date to the start of the month to generate the correct report.",
+      "instruction": "Type '01/01/23' into the 'From' date input field in the filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1374,
+          179
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1374,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_8.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1386,
+          178
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products for Jan 2023.",
+        "Observing the screenshot, the 'From' date in the filter is set to '1/31/23' and the 'To' date is '1/31/23'.",
+        "The previous actions (typing '01/01/23') seem to have been applied to the global search box in the top right corner (visible with the dropdown '01/23' in Products...), rather than the 'From' filter field.",
+        "Because the date range is incorrect (covering only one day at the end of the month) and the report likely hasn't been refreshed, the result is 'We couldn't find any records.'",
+        "To fix this, the agent must target the 'From' input field specifically within the 'Filter' section.",
+        "The correct plan is to: 1. Input '01/01/23' into the 'From' field. 2. Input '01/31/23' into the 'To' field (to be safe). 3. Click the orange 'Show Report' button. 4. Read the results."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to see the best-selling products for January 2023. The current page is the 'Bestsellers Report'. The 'Period' is correctly set to 'Month'. However, the 'From' date is currently set to '1/31/23', which is the end of the month. To cover the entire month of January 2023, the 'From' date needs to be '01/01/23'. The 'To' date is already '1/31/23', which is correct. The previous execution steps indicate that the agent mistakenly typed into the global search box at the top right (coordinates around 1326, 179) instead of the filter input fields. Therefore, I must explicitly instruct the Grounder to target the 'From' input field located in the 'Filter' section, distinct from the search bar. After correcting the date, the next step will be to click 'Show Report'.",
+      "instruction": "Type '01/01/23' into the 'From' date input field located in the Filter section, below the 'Period' dropdown.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1386,
+          178
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "type",
+      "arguments": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1386,
+          178
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_9.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for January 2023.",
+        "The current page is the 'Bestsellers Report'.",
+        "The report currently shows 'We couldn't find any records.', likely because the date filters are incorrect.",
+        "The 'From' and 'To' fields currently show '1/31/23', which is only one day or the end of the month.",
+        "The previous execution steps show the agent typing '01/01/23' multiple times, but the screenshot reveals a dropdown menu from the Global Search box (top right) with '01/23', indicating the agent typed into the Global Search instead of the Report Filter fields.",
+        "To fix this, the agent must explicitly target the 'From' and 'To' input fields within the 'Filter' section of the page, not the header search.",
+        "The correct date range for January 2023 is From: '01/01/2023' To: '01/31/2023'.",
+        "After setting the dates, the agent must click the orange 'Show Report' button to generate the data.",
+        "Therefore, the task is not done. The next steps should focus on correctly setting the filter parameters."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to see the bestsellers for Jan 2023. The current page is the Bestsellers Report. The 'Period' is correctly set to 'Month'. However, the 'From' date is currently '1/31/23', which needs to be changed to '01/01/23' to cover the entire month of January. The 'To' date is '1/31/23', which is correct for the end of January. The previous actions incorrectly typed the date into the global search box at the top right. I need to explicitly instruct the Grounder to type the start date into the 'From' input field within the Filter section.",
+      "instruction": "Type \"01/01/23\" into the \"From\" date input field in the Filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_10.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1105,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products in Jan 2023.",
+        "The current page is the 'Bestsellers Report'.",
+        "The previous actions (Steps 8-10) typed '01/01/23' into the Global Search box at the top right (indicated by the dropdown showing search results for '01/23' in Products, Orders, etc.), rather than the Report Filter 'From' field.",
+        "The Report Filter currently shows 'From: 1/31/23' and 'To: 1/31/23'. This date range is incorrect for the user request (Jan 2023). It should be From: 01/01/23 to To: 01/31/23.",
+        "The report currently displays '0 records found' likely due to the incorrect date range or lack of refresh.",
+        "The task is not done. I need to guide the agent to correctly input the start date into the filter form and generate the report.",
+        "Next steps should be: 1. Locate the 'From' input field in the Filter section (not the top search bar). 2. Input '01/01/23'. 3. Click the 'Show Report' button."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to see the bestsellers for Jan 2023. The current page is the Bestsellers Report, but the date filters are set to '1/31/23'. The previous actions seemingly interacted with the global search bar at the top right (indicated by the open dropdown with '01/23'), which is incorrect. I need to set the correct date range in the 'Filter' section. The 'From' date should be '01/01/23'. I will instruct the agent to type this date into the 'From' input field.",
+      "instruction": "Type \"01/01/23\" into the \"From\" date input field in the Filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1105,
+          179
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "type",
+      "arguments": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1105,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_11.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1216,
+          95
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the best-selling products for 'Jan 2023'.",
+        "The current page is the 'Bestsellers Report', which is the correct page.",
+        "However, the agent has been typing the date '01/01/23' into the global search bar at the top right (indicated by the dropdown menu '01/23 in Products', etc.), rather than the report filter fields.",
+        "The report filter fields 'From' and 'To' currently show '1/31/23', which represents only a single day, not the full month of January.",
+        "The report currently displays 'We couldn't find any records', likely due to the incorrect date range or the filter not being applied.",
+        "To fix this, the agent must input the correct start date '01/01/23' into the 'From' field within the 'Filter' section in the middle of the page, and ensure the 'To' field is '01/31/23'.",
+        "After setting the dates, the agent must click the orange 'Show Report' button to generate the data.",
+        "The task is not finished as no product data has been retrieved yet."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants the bestsellers for Jan 2023. The current page is the Bestsellers Report. The 'Period' is correctly set to 'Month'. However, the 'From' date is '1/31/23' and the 'To' date is '1/31/23'. To cover the entire month of January, the 'From' date needs to be '01/01/23'. The 'To' date is already correct (end of January). Previous steps show the agent incorrectly typing into the global search bar at the top right. I need to explicitly target the 'From' input field within the 'Filter' section to correct the start date.",
+      "instruction": "Type '01/01/23' into the 'From' date input field located in the Filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1216,
+          95
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1216,
+          95
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_12.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1216,
+          94
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for 'Jan 2023'.",
+        "The current page shows the 'Bestsellers Report'.",
+        "However, the 'From' date filter is set to '1/31/23' and the 'To' date filter is set to '1/31/23'. This covers only one day, not the whole month.",
+        "The agent's previous action (Step 12) typed '01/01/23' into the global search box at the top right (coordinates [1216, 95]), which is incorrect. The search box now contains '01/01/2301/23'.",
+        "The 'From' field needs to be corrected to '01/01/23' to cover the start of January.",
+        "The 'To' field is already '1/31/23', which is correct for the end of January.",
+        "After correcting the date, the 'Show Report' button must be clicked to refresh the data.",
+        "Currently, '0 records found' is displayed, so no data can be extracted yet.",
+        "The task is not finished."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to see the bestsellers for Jan 2023. Currently, the 'From' date is set to '1/31/23' and the 'To' date is '1/31/23'. My previous actions mistakenly typed the date into the global search bar at the top right. I need to correct this by entering the correct start date '01/01/23' into the 'From' filter field located in the 'Filter' section of the page, not the search bar.",
+      "instruction": "Type \"01/01/23\" into the \"From\" date input field in the Filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1216,
+          94
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1216,
+          94
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0xJTJGMzElMkYyMyZ0bz0xJTJGMzElMkYyMyZzaG93X2VtcHR5X3Jvd3M9MA==/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_13.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1120,
+          122
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for January 2023.",
+        "The current page is the 'Bestsellers Report'.",
+        "The 'From' date is currently set to '1/31/23' and the 'To' date is '1/31/23'. This only covers the last day of January, not the whole month.",
+        "The report table shows 'We couldn't find any records.', likely due to the restrictive date range or lack of data refresh.",
+        "The global search bar in the top right contains '01/01/2301/23', indicating previous typing actions might have been misdirected there.",
+        "To fix this, the 'From' date must be corrected to '01/01/23' to cover the full month of January.",
+        "After correcting the date, the 'Show Report' button must be clicked to generate the data.",
+        "The task is not finished as no product data has been retrieved yet."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to view the bestsellers report for January 2023. The current page is the Bestsellers Report. The 'Period' is correctly set to 'Month'. The 'From' date is currently '1/31/23' and the 'To' date is '1/31/23'. To cover the entire month of January, the 'From' date needs to be changed to '01/01/23'. The 'To' date is already set to the end of January ('1/31/23'), so it might not need changing, but I will start by correcting the 'From' date. Previous attempts incorrectly typed into the global search box at the top right. I need to explicitly target the 'From' input field in the 'Filter' section to ensure the correct field is modified.",
+      "instruction": "Type '01/01/23' into the 'From' input field located in the Filter section.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          1120,
+          122
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1120,
+          122
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/catalog/product/index/?search=01/01/2301/2301/23",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_14.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          1317,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The agent is currently on the 'Products' page with '0 records found', which is the wrong location for finding best-selling products.",
+        "The previous actions show the agent typed the date '01/01/23' into the global search bar (top right) instead of the 'From' and 'To' filter fields on the Bestsellers Report page. This caused a redirection to the Products search results.",
+        "To correct this, the agent needs to navigate back to 'Reports > Products > Bestsellers'.",
+        "Once on the Bestsellers Report page, the agent must carefully identify the 'From' and 'To' input fields within the filter section (below the header) and enter '01/01/2023' and '01/31/2023'.",
+        "After setting the correct dates, the agent must click the 'Show Report' button to load the data.",
+        "The task is not finished as the report has not been generated or viewed."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products for January 2023. The current page is 'Products' (Catalog), which is used for managing product attributes, not for analyzing sales performance or bestsellers. According to the 'Adobe Commerce Admin Operation Expert Strategy', the correct path for Bestsellers is `Reports -> Products -> Bestsellers`. Therefore, I need to navigate to the Reports section first. I will click the 'REPORTS' menu item in the left sidebar.",
+      "instruction": "Click the 'REPORTS' menu item in the left sidebar.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1317,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/catalog/product/new/set/4/type/simple/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_15.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          41,
+          476
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products for January 2023.",
+        "The current page is the 'New Product' page, which is used for creating new inventory items, not for analyzing sales data.",
+        "The previous page was the 'Products' grid where a search for a date string yielded 0 results. The agent then clicked 'Add Product' (Step 15), moving further away from the goal.",
+        "Sales performance data is located in the 'Reports' section of the admin panel.",
+        "The agent needs to stop trying to create a product or search the catalog grid.",
+        "The correct next step is to click on the 'Reports' icon in the left sidebar (the bar chart icon) and then navigate to 'Products > Bestsellers' to view the required data."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products for January 2023. The current page is 'New Product', which is incorrect for this task. According to the 'Adobe Commerce Admin Operation Expert Strategy', the correct path for bestsellers is 'Reports -> Bestsellers'. Therefore, I need to navigate to the Reports section first. I will click the 'Reports' icon in the left sidebar.",
+      "instruction": "Click the 'Reports' menu item (icon with bar chart) in the left sidebar.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          41,
+          476
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/catalog/product/new/set/4/type/simple/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_16.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          132,
+          167
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The agent has successfully opened the 'Reports' menu on the sidebar.",
+        "The user's goal is to find the 'top-3 best-selling product', which corresponds to the 'Bestsellers' option under the 'Products' section in the Reports menu.",
+        "The current page is the Reports menu overlay, and the 'Bestsellers' link is clearly visible.",
+        "The task is not yet complete as no report data has been generated or viewed.",
+        "The next logical step is to click on 'Bestsellers' to access the report configuration page."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products in Jan 2023. According to the 'Adobe Commerce Admin Operation Expert Strategy', the path for Bestsellers is 'Reports -> Bestsellers'. The current page shows the 'Reports' menu is already open. I can see the 'Bestsellers' link under the 'Products' section. Therefore, the next step is to click on 'Bestsellers' to navigate to the report page.",
+      "instruction": "Click the 'Bestsellers' link under the 'Products' section in the Reports menu.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          132,
+          167
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_shopcart/product/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_17.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          41,
+          474
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the 'top-3 best-selling products', but the agent navigated to the 'Products in Carts' report (as seen in the page title).",
+        "This is the wrong report. The correct report is located at 'Reports > Products > Bestsellers'.",
+        "The current page shows '0 records found', which is expected for the wrong report or lack of data, but irrelevant since it's the wrong report.",
+        "The agent needs to navigate to the correct report to proceed.",
+        "Next steps: 1. Click 'Reports' in the sidebar to open the menu. 2. Click 'Bestsellers' under the 'Products' column. 3. Filter for 'Jan 2023'."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products in Jan 2023. According to the 'Adobe Commerce Admin Operation Expert Strategy', the path for Bestsellers is `Reports -> Products -> Bestsellers`. Currently, the page is 'Products in Carts'. I need to navigate to the correct report. The first step is to click the 'REPORTS' menu in the left sidebar to reveal the submenu.",
+      "instruction": "Click the 'REPORTS' menu item on the left sidebar.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          41,
+          474
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_shopcart/product/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_18.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          731,
+          443
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products in Jan 2023.",
+        "The agent has successfully opened the 'Reports' menu sidebar.",
+        "In the 'Reports' menu, under the 'Products' section, there is a link for 'Bestsellers'. This is the correct report to answer the user's query.",
+        "The previous attempt at 'Products in Carts' yielded no results and was likely the wrong report type for 'best-selling'.",
+        "The next logical step is to click on 'Bestsellers' to access the correct report page.",
+        "Once on the Bestsellers report page, the agent will need to filter the date range for January 2023 to get the specific data.",
+        "The task is not done yet."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the top-3 best-selling products for January 2023. According to the 'Adobe Commerce Admin Operation Expert Strategy', the path to the Bestsellers report is 'Reports -> Products -> Bestsellers'. The current screenshot shows the 'Reports' menu is already open. I can see the 'Products' section in the middle column of the menu, and 'Bestsellers' is listed under it. Therefore, the next logical step is to click on the 'Bestsellers' link to navigate to the report page.",
+      "instruction": "Click the 'Bestsellers' link under the 'Products' section in the Reports menu.",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          731,
+          443
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_19.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "select_option",
+      "params": {
+        "option": "Month",
+        "coords": [
+          498,
+          451
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products for January 2023.",
+        "The agent is currently on the 'Bestsellers Report' page.",
+        "The filter fields 'From' and 'To' are currently empty, and the 'Period' is set to 'Day'.",
+        "To get a correct aggregation of best-selling products for the entire month, the 'Period' should be set to 'Month'. If left as 'Day', the report might list products per day, making it hard to find the overall top 3.",
+        "The date range needs to be set to cover January 2023 (From: 01/01/2023, To: 01/31/2023).",
+        "The previous actions involved typing, but the fields are empty, suggesting the input didn't persist or the page was reset. The agent recently clicked the date picker icon.",
+        "The next logical steps are to select 'Month' for the Period, input the specific dates for January 2023 into the 'From' and 'To' fields, and then click 'Show Report' to generate the data.",
+        "No data is currently visible to answer the user query."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to find the best-selling products for January 2023. To get a proper ranking for the entire month, I should first change the 'Period' from 'Day' to 'Month' as recommended by the expert strategy for single-month queries. After that, I will specify the date range.",
+      "instruction": "Click the 'Period' dropdown menu.",
+      "action_type": "select_option",
+      "action_attributes": {
+        "option": "Month",
+        "coords": [
+          498,
+          451
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          498,
+          451
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_20.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          498,
+          498
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The agent is on the 'Bestsellers Report' page.",
+        "The 'Period' has been set to 'Month' (visible in the dropdown box in the second screenshot, although the dropdown list is still rendering).",
+        "The 'From' and 'To' date fields are currently empty.",
+        "To retrieve the best-selling products for 'Jan 2023', the agent needs to specify the date range.",
+        "The report currently displays 'We couldn't find any records', which is expected before applying the correct date filters.",
+        "The next logical steps are to input '01/01/2023' into the 'From' field and '01/31/2023' into the 'To' field, and then click the 'Show Report' button to generate the data."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants to view the bestsellers report for January 2023. The 'Period' is already set to 'Month'. According to the expert strategy, I should directly input the dates in 'MM/DD/YY' format. The next step is to enter the start date '01/01/23' into the 'From' field.",
+      "instruction": "Type \"01/01/23\" into the \"From\" date input field.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/01/23",
+        "press_enter": false,
+        "coords": [
+          498,
+          498
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          498,
+          498
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_21.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "type",
+      "params": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          502,
+          577
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants the top-3 best-selling products for Jan 2023.",
+        "The 'From' date has been successfully set to '01/01/23'.",
+        "The 'To' date field is currently empty and is marked as a required field (indicated by the red asterisk).",
+        "The report currently shows '0 records found' because the date range is incomplete and the report hasn't been refreshed.",
+        "To complete the query, the 'To' date must be set to the end of January 2023 (e.g., '01/31/23'), and then the 'Show Report' button must be clicked to generate the results.",
+        "Therefore, the task is not finished. The next steps should focus on filling the 'To' date and generating the report."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "The user wants the bestsellers for Jan 2023. The 'From' date is already set to '01/01/23'. According to the expert strategy, the 'To' date must also be filled. Since the target period is January 2023, the 'To' date should be '01/31/23'. I need to input this date into the 'To' field.",
+      "instruction": "Type \"01/31/23\" into the \"To\" date input field.",
+      "action_type": "type",
+      "action_attributes": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          502,
+          577
+        ]
+      }
+    },
+    "grounder_output": {
+      "name": "type",
+      "arguments": {
+        "content": "01/31/23",
+        "press_enter": false,
+        "coords": [
+          502,
+          577
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_22.png"
+  },
+  {
+    "type": "action",
+    "action": {
+      "action_type": "click",
+      "params": {
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "reflector_output": {
+      "thought": [
+        "The user wants to find the top-3 best-selling products in Jan 2023.",
+        "The agent has successfully set the 'Period' to 'Month' and entered the date range '01/01/23' to '01/31/23'.",
+        "However, the report table currently displays 'We couldn't find any records.', which implies the report has not been refreshed to reflect the new filter criteria.",
+        "In Magento Admin reports, changing filter inputs does not automatically update the grid; the 'Show Report' button must be clicked.",
+        "The 'Show Report' button is visible in the top right corner (orange button).",
+        "Therefore, the next logical step is to click the 'Show Report' button to generate the data.",
+        "No data is currently available to be recorded."
+      ],
+      "mark_node": false,
+      "note": "",
+      "is_task_done": false
+    },
+    "planner_output": {
+      "thought": "I have already set the 'Period' to 'Month', 'From' date to '01/01/23', and 'To' date to '01/31/23'. The next step in the 'Check Sales' workflow is to generate the report. I need to click the 'Show Report' button to apply these filters and view the bestsellers for January 2023.",
+      "instruction": "Click the 'Show Report' button in the top right corner",
+      "action_type": "click",
+      "action_attributes": null
+    },
+    "grounder_output": {
+      "name": "click",
+      "arguments": {
+        "coords": [
+          1326,
+          179
+        ]
+      }
+    },
+    "page_url": "http://ecs_ip:7780/admin/reports/report_sales/bestsellers/filter/cGVyaW9kX3R5cGU9bW9udGgmZnJvbT0wMSUyRjAxJTJGMjMmdG89MDElMkYzMSUyRjIzJnNob3dfZW1wdHlfcm93cz0w/",
+    "error_msg": ""
+  },
+  {
+    "type": "observation",
+    "image_path": "images/screenshot_23.png"
+  },
+  {
+    "type": "generated_answer",
+    "generated_final_answer": "<|im_start|>assistant\n<answer>Impulse Duffle, Overnight Duffle, and Hawkeye Yoga Short-32-Blue</answer>\n<|im_end|>"
+  },
+  {
+    "configs": {
+      "sites": [
+        "shopping_admin"
+      ],
+      "task_id": 4,
+      "require_login": true,
+      "storage_state": "./.auth/shopping_admin_state.json",
+      "start_url": "http://ecs_ip:7780/admin",
+      "geolocation": null,
+      "intent_template": "What are the top-{{n}} best-selling product in {{period}}",
+      "instantiation_dict": {
+        "n": 3,
+        "period": "Jan 2023"
+      },
+      "intent": "What are the top-3 best-selling product in Jan 2023",
+      "require_reset": false,
+      "eval": {
+        "eval_types": [
+          "string_match"
+        ],
+        "reference_answers": {
+          "must_include": [
+            "Impulse Duffle",
+            "Overnight Duffle",
+            "Hawkeye Yoga Short-32-Blue"
+          ]
+        },
+        "reference_url": "",
+        "program_html": [],
+        "string_note": "",
+        "reference_answer_raw_annotation": "Impulse Duffle, Overnight Duffle, Hawkeye Yoga Short-32-Blue"
+      },
+      "intent_template_id": 279,
+      "conflict_key": "SHOP_ADMIN-R-REPORTS-bestseller"
+    }
+  },
+  {
+    "type": "evaluation",
+    "score": 1.0
+  }
+]

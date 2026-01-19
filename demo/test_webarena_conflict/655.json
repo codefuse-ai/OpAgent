@@ -1,0 +1,42 @@
+{
+  "sites": [
+    "shopping"
+  ],
+  "task_id": 655,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7770",
+  "geolocation": null,
+  "intent_template": "Fill the \"contact us\" form in the site for a refund on the {{product}} I bought, stating that it broke after just three days of use. Also, ensure to include the order number #{{order_id}} and the product SKU. Don't submit yet, I will check.",
+  "instantiation_dict": {
+    "product": "iphone case",
+    "order_id": "180"
+  },
+  "intent": "Fill the \"contact us\" form in the site for a refund on the iphone case I bought, stating that it broke after just three days of use. Also, ensure to include the order number #180 and the product SKU. Don't submit yet, I will check.",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "url_match",
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "http://REPLACE_WITH_YOUR_HOST:7770/contact",
+    "program_html": [
+      {
+        "url": "last",
+        "locator": "document.querySelector('[title=\"What’s on your mind?\"').value",
+        "required_contents": {
+          "must_include": [
+            "refund",
+            "it broke after three days of use",
+            "180",
+            "B087QJN9W1"
+          ]
+        }
+      }
+    ],
+    "url_note": "GOLD in PRED"
+  },
+  "intent_template_id": 153,
+  "conflict_key": "SHOP-W-CONTACT_FORM-draft_refund_180"
+}
