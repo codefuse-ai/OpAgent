@@ -1,4 +1,4 @@
-# WebArena Results Statistics Tool
+# WebArena Results
 
 ## Overview
 
