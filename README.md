@@ -4,17 +4,6 @@
 
 `calculate_acc.py` is a Python script for calculating accuracy statistics from WebArena test results. It automatically computes overall accuracy, per-website accuracy, and generates detailed statistical reports.
 
-## Supported Websites
-
-| Port | Website Name |
-|------|--------------|
-| 7770 | shopping |
-| 7780 | shopping_admin |
-| 9999 | reddit |
-| 8023 | gitlab |
-| 8888 | wikipedia |
-| 3000 | map |
-
 ## Directory Structure Support
 
 The script supports two different result directory structures:
