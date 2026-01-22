@@ -74,7 +74,7 @@ A unified model call interface encapsulating requests to different backend servi
 *   **HTTP**: General HTTP calls.
 *   **AFTS Tool Integration**: Automatically handles image uploads, converting Base64 to URLs for specific models.
 
-### 2.3 `BrowserActor` & Distributed Execution
+#### 2.3 `BrowserActor` & Distributed Execution
 *   **BrowserActor**: Encapsulates the Playwright Browser instance, supporting browser connection management across threads/processes.
 *   **Worker**: Multi-threaded workflow, where each Worker binds an ECS instance IP and a Browser Endpoint.
 *   **Environment Refresh**: Automatically handles SSH connections, Cookie injection, and ECS website status reset before tasks start.
