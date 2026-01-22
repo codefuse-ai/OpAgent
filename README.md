@@ -157,7 +157,7 @@ The script will automatically process the following directories:
 
 ### Output Examples
 
-### Console Output
+#### Console Output
 
 ```
 ================================================================================
@@ -236,7 +236,119 @@ WIKIPEDIA (Port: 8888):
 Detailed results saved to: webarena_results/accuracy_report_visual.json
 ```
 
-### JSON Report Output
+#### JSON Report Output
+
+The script automatically generates two JSON files:
+- `webarena_results/accuracy_report_visual.json`
+- `webarena_results/accuracy_report_final.json`
+
+JSON files contain complete statistics for further analysis:
+
+```json
+{
+  "total_samples": 809,
+  "successful_samples": 581,
+  "failed_samples_count": 228,
+  "accuracy": 71.82,
+  "average_score": 0.7182,
+  "score_distribution": {
+    "0.0": 228,
+    "1.0": 581
+  },
+  "site_statistics": {
+    "reddit": {
+      "port": "9999",
+      "total_samples": 114,
+      "successful_samples": 98,
+      "failed_samples_count": 16,
+      "accuracy": 85.96,
+      "average_score": 0.8596
+    },
+    ...
+  }
+}
+```
+
+#### Console Output
+
+```
+================================================================================
+PROCESSING FINAL_VISUAL_RESULTS DIRECTORY
+================================================================================
+
+============================================================
+Sample Accuracy Statistics Report
+============================================================
+Results Directory: ./webarena_results/final_visual_results
+------------------------------------------------------------
+Total Samples: 809
+Successful Samples: 581
+Failed Samples: 228
+Accuracy: 71.82%
+Accuracy for 812 samples: 0.7155 (581/812)
+Average Score: 0.7182
+------------------------------------------------------------
+Score Distribution:
+  Score 0.0: 228 samples (28.18%)
+  Score 1.0: 581 samples (71.82%)
+------------------------------------------------------------
+Statistics by Website:
+------------------------------------------------------------
+
+GITLAB (Port: 8023):
+  Total Samples: 195
+  Successful Samples: 148
+  Failed Samples: 47
+  Accuracy: 75.9%
+  Average Score: 0.759
+  Failed Sample Examples: val_102, val_136, val_178
+
+MAP (Port: 3000):
+  Total Samples: 112
+  Successful Samples: 80
+  Failed Samples: 32
+  Accuracy: 71.43%
+  Average Score: 0.7143
+  Failed Sample Examples: val_10, val_140, val_153
+
+REDDIT (Port: 9999):
+  Total Samples: 114
+  Successful Samples: 98
+  Failed Samples: 16
+  Accuracy: 85.96%
+  Average Score: 0.8596
+  Failed Sample Examples: val_28, val_406, val_407
+
+SHOPPING (Port: 7770):
+  Total Samples: 191
+  Successful Samples: 113
+  Failed Samples: 78
+  Accuracy: 59.16%
+  Average Score: 0.5916
+  Failed Sample Examples: val_118, val_124, val_125
+
+SHOPPING_ADMIN (Port: 7780):
+  Total Samples: 181
+  Successful Samples: 129
+  Failed Samples: 52
+  Accuracy: 71.27%
+  Average Score: 0.7127
+  Failed Sample Examples: val_108, val_109, val_111
+
+WIKIPEDIA (Port: 8888):
+  Total Samples: 16
+  Successful Samples: 13
+  Failed Samples: 3
+  Accuracy: 81.25%
+  Average Score: 0.8125
+  Failed Sample Examples: val_265, val_425, val_738
+------------------------------------------------------------
+============================================================
+
+Detailed results saved to: webarena_results/accuracy_report_visual.json
+```
+
+#### JSON Report Output
 
 The script automatically generates two JSON files:
 - `webarena_results/accuracy_report_visual.json`
