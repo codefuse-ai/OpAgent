@@ -19,8 +19,7 @@
 
 ## News
 🔥🔥🔥 [2026/01/22] We are pleased to announce that Oagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
-![webarena_leaderboard](./assets/webarena_leaderboard.png)
-
+- 🤖 **Model**: [codefuse-ai/OAgent](https://huggingface.co/codefuse-ai/OAgent)
 
 ## Introduction
 This document describes the structure of the demo WebAgent framework implemented in the `./demo/local_agent_eval.py` script. This framework aims to execute and evaluate automated tasks in real Web environments (such as the WebArena Shopping environment) via local/remote model calls.
@@ -103,6 +102,26 @@ The framework defines four core Prompt templates guiding different Agent roles:
 ---
 
 
+###  5.Performance
+
+#### 1. Agentic Framework SOTA Performance
+
+Our full agentic framework, OAgent, which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
+
+![webarena_leaderboard](./assets/webarena_leaderboard.png)
+
+#### 2. Single Model Enhancement via Online RL
+
+A key innovation in this project is our **Online Agentic Reinforcement Learning (RL) pipeline**. This pipeline significantly improves the capability of a single Vision-Language Model (VLM) for web navigation, before it is integrated into the full agentic framework.
+
+We applied our hybrid reward RL strategy to the `Qwen3-VL-Thinking` model. The results below show that our method substantially boosts the model's standalone performance, outperforming other monolithic baselines on WebArena.
+
+![single_model](./assets/single_model.png)
+
+
+As shown, our RL-enhanced single model (`RL-HybridReward-Zero`) achieves a **38.1%** success rate, marking a **10.7% absolute improvement** over the original baseline model. This demonstrates the effectiveness of our training methodology.
+
+---
 
 
 
