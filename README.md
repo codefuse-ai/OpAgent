@@ -106,7 +106,7 @@ The framework defines four core Prompt templates guiding different Agent roles:
 
 #### 1. Agentic Framework SOTA Performance
 
-Our full agentic framework, OpAgent, which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
+Our full agentic framework, OpAgent (formerly OAgent on the WebArena leaderboard), which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
 
 ![webarena_leaderboard](./assets/webarena_leaderboard.png)
 
