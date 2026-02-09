@@ -1,4 +1,4 @@
-# OAgent 
+# OpAgent 
 
 ![CodefuseLogo](./assets/github-codefuse-logo-update.jpg)
 
@@ -18,8 +18,8 @@
   
 
 ## News
-🔥🔥🔥 [2026/01/22] We are pleased to announce that Oagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
-- 🤖 **Model**: [codefuse-ai/OAgent](https://huggingface.co/codefuse-ai/OAgent)
+🔥🔥🔥 [2026/01/22] We are pleased to announce that OpAgent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
+- 🤖 **Model**: [codefuse-ai/OpAgent](https://huggingface.co/codefuse-ai/OpAgent)
 
 ## Introduction
 This document describes the structure of the demo WebAgent framework implemented in the `./demo/local_agent_eval.py` script. This framework aims to execute and evaluate automated tasks in real Web environments (such as the WebArena Shopping environment) via local/remote model calls.
@@ -106,7 +106,7 @@ The framework defines four core Prompt templates guiding different Agent roles:
 
 #### 1. Agentic Framework SOTA Performance
 
-Our full agentic framework, OAgent, which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
+Our full agentic framework, OpAgent, which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
 
 ![webarena_leaderboard](./assets/webarena_leaderboard.png)
 
