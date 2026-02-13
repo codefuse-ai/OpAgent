@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAgent Browser - Web Agent Controller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f7f7f8;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .message.assistant .avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.user .avatar {
+            background: #e5e5ea;
+            color: #666;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            line-height: 1.5;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            border: 1px solid #e5e5ea;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message-content pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .message.user .message-content pre {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .status-bar {
+            padding: 12px 20px;
+            background: #f0f0f0;
+            border-top: 1px solid #e5e5ea;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34c759;
+        }
+
+        .status-dot.thinking {
+            background: #ff9500;
+            animation: pulse 1s infinite;
+        }
+
+        .status-dot.error {
+            background: #ff3b30;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e5e5ea;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .input-field {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-field textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e5ea;
+            border-radius: 12px;
+            font-size: 15px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+            min-height: 52px;
+            max-height: 120px;
+        }
+
+        .input-field textarea:focus {
+            border-color: #667eea;
+        }
+
+        .input-field textarea::placeholder {
+            color: #aaa;
+        }
+
+        .send-btn {
+            width: 52px;
+            height: 52px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .send-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .url-input {
+            margin-bottom: 12px;
+        }
+
+        .url-input input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e5ea;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .url-input input:focus {
+            border-color: #667eea;
+        }
+
+        .action-log {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #666;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+
+        .thinking-content {
+            color: #888;
+            font-style: italic;
+            font-size: 13px;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .welcome-message h2 {
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .welcome-message p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .example-queries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .example-query {
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .example-query:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                🤖 OAgent Browser
+            </h1>
+            <p>AI-Powered Web Automation Agent</p>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="welcome-message">
+                <h2>👋 欢迎使用 OAgent Browser</h2>
+                <p>
+                    我是一个 Web 自动化 Agent，可以帮助你在浏览器中完成各种任务。<br>
+                    请输入目标网址和你想要完成的任务，我会自动操作浏览器帮你完成。
+                </p>
+                <div class="example-queries">
+                    <span class="example-query" onclick="setExample('在 Google 搜索 Playwright 教程')">搜索教程</span>
+                    <span class="example-query" onclick="setExample('查找 Python 官网的下载页面')">查找下载</span>
+                    <span class="example-query" onclick="setExample('登录到管理后台并查看订单列表')">查看订单</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Ready - 等待输入任务</span>
+        </div>
+
+        <div class="input-container">
+            <div class="url-input">
+                <input type="text" id="urlInput" placeholder="输入目标网址 (例如: https://www.google.com)" value="http://47.99.81.187:8023">
+            </div>
+            <div class="input-wrapper">
+                <div class="input-field">
+                    <textarea 
+                        id="queryInput" 
+                        placeholder="描述你想要完成的任务..."
+                        rows="1"
+                        onkeydown="handleKeyDown(event)"
+                    ></textarea>
+                </div>
+                <button class="send-btn" id="sendBtn" onclick="sendQuery()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chatContainer');
+        const urlInput = document.getElementById('urlInput');
+        const queryInput = document.getElementById('queryInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+
+        let ws = null;
+        let isProcessing = false;
+
+        // 连接 WebSocket
+        function connectWebSocket() {
+            ws = new WebSocket('ws://127.0.0.1:9334/agent');
+            
+            ws.onopen = () => {
+                console.log('WebSocket connected');
+                setStatus('ready', 'Connected - 等待输入任务');
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                handleServerMessage(data);
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket disconnected');
+                setStatus('error', 'Disconnected - 正在重连...');
+                setTimeout(connectWebSocket, 3000);
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                setStatus('error', 'Connection error');
+            };
+        }
+
+        function handleServerMessage(data) {
+            switch(data.type) {
+                case 'thinking':
+                    setStatus('thinking', `思考中: ${data.content.substring(0, 50)}...`);
+                    break;
+                case 'action':
+                    addActionMessage(data);
+                    setStatus('thinking', `执行动作: ${data.action_type}`);
+                    break;
+                case 'screenshot':
+                    // 可以显示截图预览
+                    break;
+                case 'response':
+                    addAssistantMessage(data.content, data.thinking);
+                    break;
+                case 'done':
+                    setStatus('ready', 'Task completed - 任务完成');
+                    isProcessing = false;
+                    sendBtn.disabled = false;
+                    break;
+                case 'error':
+                    addAssistantMessage(`❌ 错误: ${data.content}`);
+                    setStatus('error', 'Error occurred');
+                    isProcessing = false;
+                    sendBtn.disabled = false;
+                    break;
+            }
+        }
+
+        function setStatus(type, text) {
+            statusDot.className = 'status-dot';
+            if (type === 'thinking') {
+                statusDot.classList.add('thinking');
+            } else if (type === 'error') {
+                statusDot.classList.add('error');
+            }
+            statusText.textContent = text;
+        }
+
+        function addUserMessage(content) {
+            const welcomeMsg = chatContainer.querySelector('.welcome-message');
+            if (welcomeMsg) {
+                welcomeMsg.remove();
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `
+                <div class="avatar">👤</div>
+                <div class="message-content">${escapeHtml(content)}</div>
+            `;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function addAssistantMessage(content, thinking = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant';
+            
+            let thinkingHtml = '';
+            if (thinking) {
+                thinkingHtml = `<div class="thinking-content">💭 ${escapeHtml(thinking)}</div>`;
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="avatar">🤖</div>
+                <div class="message-content">
+                    ${thinkingHtml}
+                    ${escapeHtml(content)}
+                </div>
+            `;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function addActionMessage(data) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant';
+            
+            let paramsStr = JSON.stringify(data.params, null, 2);
+            
+            messageDiv.innerHTML = `
+                <div class="avatar">⚡</div>
+                <div class="message-content">
+                    <strong>执行动作: ${data.action_type}</strong>
+                    <div class="action-log">
+                        <pre>${escapeHtml(paramsStr)}</pre>
+                    </div>
+                </div>
+            `;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function sendQuery() {
+            if (isProcessing) return;
+            
+            const url = urlInput.value.trim();
+            const query = queryInput.value.trim();
+            
+            if (!query) {
+                alert('请输入任务描述');
+                return;
+            }
+
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                alert('WebSocket 未连接，请稍后重试');
+                return;
+            }
+
+            isProcessing = true;
+            sendBtn.disabled = true;
+            
+            addUserMessage(query);
+            setStatus('thinking', '正在处理任务...');
+            
+            ws.send(JSON.stringify({
+                type: 'query',
+                url: url,
+                query: query
+            }));
+            
+            queryInput.value = '';
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendQuery();
+            }
+        }
+
+        function setExample(text) {
+            queryInput.value = text;
+            queryInput.focus();
+        }
+
+        // Auto-resize textarea
+        queryInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Connect on load
+        connectWebSocket();
+    </script>
+</body>
+</html>

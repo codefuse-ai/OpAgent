@@ -1,4 +1,4 @@
-# OpAgent 
+# OAgent 
 
 ![CodefuseLogo](./assets/github-codefuse-logo-update.jpg)
 
@@ -10,16 +10,18 @@
   - [Prompt System](#3-prompt-system)
   - [Key Features](#4-key-features)
 - [Usage](#usage)
-  - [Overview](#overview)
-  - [Directory Structure Support](#directory-dtructure-support)
-  - [Basic Usage](#basic-usage)
-  - [Output Examples](#output-examples)
-  - [Data Field Description](#data-field-description)
+  - [Installation](#installation)
+  - [Quick Start](#quick-start)
+  - [Command Line Options](#command-line-options)
+  - [Interactive Mode](#interactive-mode)
+- [Citation](#citation)
   
 
 ## News
-🔥🔥🔥 [2026/01/22] We are pleased to announce that OpAgent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
-- 🤖 **Model**: [codefuse-ai/OpAgent](https://huggingface.co/codefuse-ai/OpAgent)
+🔥🔥🔥 [2026/01/22] We are pleased to announce that Oagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
+- 🤖 **Huggingface**: [codefuse-ai/OAgent](https://huggingface.co/codefuse-ai/OpAgent-32B)
+- 🤖 **Modelscope**: [codefuse-ai/OAgent](https://modelscope.cn/models/codefuse-ai/OpAgent-32B)
+
 
 ## Introduction
 This document describes the structure of the demo WebAgent framework implemented in the `./demo/local_agent_eval.py` script. This framework aims to execute and evaluate automated tasks in real Web environments (such as the WebArena Shopping environment) via local/remote model calls.
@@ -106,7 +108,7 @@ The framework defines four core Prompt templates guiding different Agent roles:
 
 #### 1. Agentic Framework SOTA Performance
 
-Our full agentic framework, OpAgent (formerly OAgent on the WebArena leaderboard), which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
+Our full agentic framework, OAgent, which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
 
 ![webarena_leaderboard](./assets/webarena_leaderboard.png)
 
@@ -133,189 +135,115 @@ As shown, our RL-enhanced single model (`RL-HybridReward-Zero`) achieves a **38.
 
 ## Usage
 
-### Overview
-`calculate_acc.py` is a Python script for calculating accuracy statistics from WebArena test results. It automatically computes overall accuracy, per-website accuracy, and generates detailed statistical reports.
+OAgent Browser is a headless browser-based Web Agent tool, suitable for server-side execution. It uses the `codefuse-ai/OpAgent` model (based on Qwen3-32B) with vLLM for inference.
 
-### Directory Structure Support
-
-The script supports two different result directory structures:
-
-#### 1. Subdirectory Structure (final_visual_results with step-wise screenshots in images)
-```
-final_visual_results/
-├── val_0/
-│   └── images
-│   └── trajectory.json
-├── val_1/
-│   └── images
-│   └── trajectory.json
-└── ...
-```
-
-#### 2. Direct JSON Files (final_results)
-```
-final_results/
-├── 0.json
-├── 1.json
-├── 2.json
-└── ...
-```
-
-### Basic Usage
-
-Run the script directly:
+### Installation
 
 ```bash
-python calculate_acc.py
+cd oagent_browser
+pip install -r requirements.txt
 ```
 
-The script will automatically process the following directories:
-- `./webarena_results/final_visual_results`
-- `./webarena_results/final_results`
+### Quick Start
 
-
-### Output Examples
-
-#### Console Output
-
-```
-================================================================================
-PROCESSING FINAL_VISUAL_RESULTS DIRECTORY
-================================================================================
-
-============================================================
-Sample Accuracy Statistics Report
-============================================================
-Results Directory: ./webarena_results/final_visual_results
-------------------------------------------------------------
-Total Samples: 809
-Successful Samples: 581
-Failed Samples: 228
-Accuracy: 71.82%
-Accuracy for 812 samples: 0.7155 (581/812)
-Average Score: 0.7182
-------------------------------------------------------------
-Score Distribution:
-  Score 0.0: 228 samples (28.18%)
-  Score 1.0: 581 samples (71.82%)
-------------------------------------------------------------
-Statistics by Website:
-------------------------------------------------------------
-
-GITLAB (Port: 8023):
-  Total Samples: 195
-  Successful Samples: 148
-  Failed Samples: 47
-  Accuracy: 75.9%
-  Average Score: 0.759
-  Failed Sample Examples: val_102, val_136, val_178
-
-MAP (Port: 3000):
-  Total Samples: 112
-  Successful Samples: 80
-  Failed Samples: 32
-  Accuracy: 71.43%
-  Average Score: 0.7143
-  Failed Sample Examples: val_10, val_140, val_153
-
-REDDIT (Port: 9999):
-  Total Samples: 114
-  Successful Samples: 98
-  Failed Samples: 16
-  Accuracy: 85.96%
-  Average Score: 0.8596
-  Failed Sample Examples: val_28, val_406, val_407
-
-SHOPPING (Port: 7770):
-  Total Samples: 191
-  Successful Samples: 113
-  Failed Samples: 78
-  Accuracy: 59.16%
-  Average Score: 0.5916
-  Failed Sample Examples: val_118, val_124, val_125
-
-SHOPPING_ADMIN (Port: 7780):
-  Total Samples: 181
-  Successful Samples: 129
-  Failed Samples: 52
-  Accuracy: 71.27%
-  Average Score: 0.7127
-  Failed Sample Examples: val_108, val_109, val_111
-
-WIKIPEDIA (Port: 8888):
-  Total Samples: 16
-  Successful Samples: 13
-  Failed Samples: 3
-  Accuracy: 81.25%
-  Average Score: 0.8125
-  Failed Sample Examples: val_265, val_425, val_738
-------------------------------------------------------------
-============================================================
-
-Detailed results saved to: webarena_results/accuracy_report_visual.json
+```bash
+python main.py
 ```
 
-#### JSON Report Output
+The agent will:
+1. Load the OpAgent model
+2. Start a headless browser
+3. Navigate to the default page (Google)
+4. Enter interactive mode for task execution
 
-The script automatically generates two JSON files:
-- `webarena_results/accuracy_report_visual.json`
-- `webarena_results/accuracy_report_final.json`
+### Command Line Options
 
-JSON files contain complete statistics for further analysis:
+```bash
+python main.py [OPTIONS]
 
-```json
-{
-  "total_samples": 809,
-  "successful_samples": 581,
-  "failed_samples_count": 228,
-  "accuracy": 71.82,
-  "average_score": 0.7182,
-  "score_distribution": {
-    "0.0": 228,
-    "1.0": 581
-  },
-  "site_statistics": {
-    "reddit": {
-      "port": "9999",
-      "total_samples": 114,
-      "successful_samples": 98,
-      "failed_samples_count": 16,
-      "accuracy": 85.96,
-      "average_score": 0.8596
-    },
-    ...
-  }
+Options:
+  --output, -o PATH          Output directory for trajectory files
+  --max-steps, -m INT        Maximum steps per task (default: 50)
+  --model-path PATH          Path to local model (default: codefuse-ai/OpAgent)
+  --tensor-parallel-size, -tp INT  Number of GPUs for tensor parallelism
+  --max-model-len INT        Max model sequence length (default: 32768)
+  --gpu-memory-utilization FLOAT   GPU memory utilization (default: 0.9)
+```
+
+#### Examples
+
+```bash
+# Basic usage with default settings
+python main.py
+
+# Use 2 GPUs with custom output directory
+python main.py -tp 2 -o ./my_results
+
+# Limit max steps and adjust GPU memory
+python main.py --max-steps 30 --gpu-memory-utilization 0.95
+
+# Use a local model checkpoint
+python main.py --model-path /path/to/local/model
+```
+
+### Interactive Mode
+
+Once the browser starts, you'll enter an interactive loop:
+
+```
+🌐 Enter task URL (press Enter to use current page, 'quit' to exit): 
+🎯 Enter task description: 
+```
+
+1. **URL Input**: Enter a URL to navigate to, or press Enter to use the current page
+   - Invalid URLs will automatically fallback to the default page
+   - URLs without `http://` or `https://` will be prefixed with `https://`
+
+2. **Task Description**: Describe what you want the agent to do
+
+3. **Execution**: The agent will:
+   - Take screenshots
+   - Call the model for next action
+   - Execute browser actions (click, type, scroll, etc.)
+   - Save trajectory with annotated screenshots
+
+4. **Output**: Results are saved to the output directory:
+   ```
+   output/YYYYMMDD_HHMMSS/
+   ├── screenshots/      # Original screenshots
+   ├── annotated/        # Screenshots with action annotations
+   └── trajectory.json   # Complete execution trajectory
+   ```
+
+#### Session Example
+
+```
+🌐 Enter task URL (press Enter to use current page, 'quit' to exit): amazon.com
+   → Navigating to: https://amazon.com
+   ✅ URL loaded successfully
+🎯 Enter task description: Search for wireless headphones under $50
+
+... agent executes task ...
+
+📁 Trajectory saved: output/20260213_143052/trajectory.json
+```
+
+Type `quit`, `exit`, or `q` to end the session.
+
+---
+
+## Citation
+
+If you use OpAgent in your research or project, please cite it as follows:
+
+```bibtex
+@misc{opagent2026,
+  author = {CodeFuse-AI Team},
+  title = {OpAgent: Operator Agent for Web Navigation},
+  year = {2026},
+  publisher = {GitHub},
+  howpublished = {\url{https://github.com/codefuse-ai/OpAgent}},
+  url = {https://github.com/codefuse-ai/OpAgent}
 }
 ```
-
-### Data Field Description
-
-#### trajectory.json Structure
-
-The script extracts the following information from each sample's trajectory.json:
-
-```json
-[
-  {
-    "type": "action",
-    "page_url": "http://example.com:7780/...",
-    ...
-  },
-  {
-    "configs": {
-      "sites": ["shopping_admin"],
-      "task_id": 2,
-      ...
-    }
-  },
-  {
-    "type": "evaluation",
-    "score": 0.0 or 1.0
-  }
-]
-```
-
-
-
-
 
