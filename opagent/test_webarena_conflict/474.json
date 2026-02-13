@@ -1,0 +1,34 @@
+{
+  "sites": [
+    "shopping_admin"
+  ],
+  "task_id": 474,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_admin_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin",
+  "geolocation": null,
+  "intent_template": "Cancel order {{id}}",
+  "instantiation_dict": {
+    "id": "305"
+  },
+  "intent": "Cancel order 305",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "",
+    "program_html": [
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/sales/order/view/order_id/305/",
+        "locator": "document.querySelector(\"#order_status\").outerText",
+        "required_contents": {
+          "exact_match": "Canceled"
+        }
+      }
+    ]
+  },
+  "intent_template_id": 257,
+  "conflict_key": "SHOP_ADMIN-W-ORDER-305"
+}

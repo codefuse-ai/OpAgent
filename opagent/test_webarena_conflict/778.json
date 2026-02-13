@@ -1,0 +1,50 @@
+{
+  "sites": [
+    "shopping_admin"
+  ],
+  "task_id": 778,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_admin_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin",
+  "geolocation": null,
+  "intent_template": "{{action}} the price of {{config}} by {{amount}}",
+  "instantiation_dict": {
+    "amount": "13.5%",
+    "action": "Reduce",
+    "config": "size 28 Sahara leggings"
+  },
+  "intent": "Reduce the price of size 28 Sahara leggings by 13.5%",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "",
+    "program_html": [
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/1841/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "64.88"
+        }
+      },
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/1842/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "64.88"
+        }
+      },
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/1843/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "64.88"
+        }
+      }
+    ]
+  },
+  "intent_template_id": 742,
+  "conflict_key": "SHOP_ADMIN-W-PRODUCT_PRICE-Sahara_leggings"
+}

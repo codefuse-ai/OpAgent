@@ -1,0 +1,64 @@
+{
+  "sites": [
+    "shopping_admin"
+  ],
+  "task_id": 777,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_admin_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin",
+  "geolocation": null,
+  "intent_template": "{{action}} the price of {{config}} by {{amount}}",
+  "instantiation_dict": {
+    "amount": "$5",
+    "action": "Reduce",
+    "config": "green Hollister backyard sweater in all size"
+  },
+  "intent": "Reduce the price of green Hollister backyard sweater in all size by $5",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "",
+    "program_html": [
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/120/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "47.00"
+        }
+      },
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/117/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "47.00"
+        }
+      },
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/114/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "47.00"
+        }
+      },
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/111/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "47.00"
+        }
+      },
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/catalog/product/edit/id/123/",
+        "locator": "document.querySelector('[name=\"product[price]\"').value",
+        "required_contents": {
+          "exact_match": "47.00"
+        }
+      }
+    ]
+  },
+  "intent_template_id": 742,
+  "conflict_key": "SHOP_ADMIN-W-PRODUCT_PRICE-Hollister_backyard_sweater"
+}

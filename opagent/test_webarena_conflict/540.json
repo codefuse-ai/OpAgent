@@ -1,0 +1,41 @@
+{
+  "sites": [
+    "shopping_admin"
+  ],
+  "task_id": 540,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_admin_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin",
+  "geolocation": null,
+  "intent_template": "Modify the address of order #{{order_id}} to {{address}}",
+  "instantiation_dict": {
+    "order_id": "301",
+    "address": "321 Birch Boulevard, Suite 200, Dallas, TX, 75201"
+  },
+  "intent": "Modify the address of order #301 to 321 Birch Boulevard, Suite 200, Dallas, TX, 75201",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "",
+    "program_html": [
+      {
+        "url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/sales/order/view/order_id/301",
+        "locator": "",
+        "required_contents": {
+          "must_include": [
+            "321 Birch Boulevard",
+            "Suite 200",
+            "Dallas",
+            "Texas",
+            "75201"
+          ]
+        }
+      }
+    ]
+  },
+  "intent_template_id": 240,
+  "conflict_key": "SHOP_ADMIN-W-ORDER-301"
+}

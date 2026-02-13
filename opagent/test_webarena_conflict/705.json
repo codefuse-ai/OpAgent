@@ -1,0 +1,44 @@
+{
+  "sites": [
+    "shopping_admin"
+  ],
+  "task_id": 705,
+  "require_login": true,
+  "storage_state": "./.auth/shopping_admin_state.json",
+  "start_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin",
+  "geolocation": null,
+  "intent_template": "Today is 3/15/2023, generate a {{report}} {{time_span}}",
+  "instantiation_dict": {
+    "report": "sales order report",
+    "time_span": "over the last 45 days"
+  },
+  "intent": "Today is 3/15/2023, generate a sales order report over the last 45 days",
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      "url_match",
+      "program_html"
+    ],
+    "reference_answers": null,
+    "reference_url": "http://REPLACE_WITH_YOUR_HOST:7780/admin/reports/report_sales/sales",
+    "program_html": [
+      {
+        "url": "last",
+        "locator": "document.querySelector('[id=\"sales_report_from\"').value",
+        "required_contents": {
+          "exact_match": "1/29/23"
+        }
+      },
+      {
+        "url": "last",
+        "locator": "document.querySelector('[id=\"sales_report_to\"').value",
+        "required_contents": {
+          "exact_match": "3/15/23"
+        }
+      }
+    ],
+    "url_note": "GOLD in PRED"
+  },
+  "intent_template_id": 268,
+  "conflict_key": "SHOP_ADMIN-R-REPORTS-sales"
+}

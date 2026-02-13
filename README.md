@@ -1,30 +1,103 @@
-# OAgent 
+# OpAgent
 
 ![CodefuseLogo](./assets/github-codefuse-logo-update.jpg)
 
+<p align="center">
+    <a href="https://huggingface.co/codefuse-ai/OpAgent-32B">
+        <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OpAgent--32B-blue" alt="Hugging Face">
+    </a>
+    <a href="https://modelscope.cn/models/codefuse-ai/OpAgent-32B">
+        <img src="https://img.shields.io/badge/%F0%9F%94%A5%20ModelScope-OpAgent--32B-blue" alt="ModelScope">
+    </a>
+    <a href="https://arxiv.org/abs/YOUR_ARXIV_ID"> <!-- TODO: 如果有论文，请替换链接 -->
+        <img src="https://img.shields.io/badge/ArXiv-240X.XXXXX-b31b1b.svg" alt="Paper">
+    </a>
+</p>
+
+`OpAgent` is a powerful agentic framework designed for autonomous web navigation and operation. It comes in two primary modes to suit different use cases: a full-featured **Agentic Framework** for state-of-the-art performance, and a streamlined **Single-Model Mode** for ease of use and quick deployment.
+
 ## Contents
 - [News](#news)
-- [Introduction](#introduction)
-  - [Framework](#1-framework)
+- [Overview](#overview)
+- [Performance Highlights](#performance-highlights)
+- [Getting Started](#getting-started)
+- [Detailed Introduction: The Agentic Framework](#detailed-introduction-the-agentic-framework)
+  - [Framework Architecture](#1-framework-architecture)
   - [Key Modules](#2-key-modules)
   - [Prompt System](#3-prompt-system)
-  - [Key Features](#4-key-features)
-- [Usage](#usage)
-  - [Installation](#installation)
-  - [Quick Start](#quick-start)
-  - [Command Line Options](#command-line-options)
-  - [Interactive Mode](#interactive-mode)
 - [Citation](#citation)
-  
 
 ## News
-🔥🔥🔥 [2026/01/22] We are pleased to announce that Oagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
-- 🤖 **Huggingface**: [codefuse-ai/OAgent](https://huggingface.co/codefuse-ai/OpAgent-32B)
-- 🤖 **Modelscope**: [codefuse-ai/OAgent](https://modelscope.cn/models/codefuse-ai/OpAgent-32B)
+🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
+
+## Overview
+
+This repository provides the code and models for `OpAgent`, an operator agent for web navigation. We offer two distinct modes:
+
+1.  **OpAgent: Single-Model Mode** (`opagent_single_model/` directory)
+    *   A simplified, end-to-end approach where a single, powerful Vision-Language Model (VLM) directly performs web navigation tasks.
+    *   This mode is designed for accessibility and quick deployment, offering a powerful yet easy-to-use solution for web automation.
+    *   Perfect for developers who want to quickly integrate a web agent into their applications.
+
+2.  **OpAgent: The Full Agentic Framework** (`opagent/` directory)
+    *   An advanced, multi-agent system composed of a **Planner, Grounder, Reflector, and Summarizer**.
+    *   This architecture enables sophisticated reasoning, robust error recovery, and self-correction, achieving top-tier performance on complex, long-horizon web tasks.
+    *   Ideal for researchers and users seeking maximum performance and a deep dive into agentic AI architectures.
 
 
-## Introduction
-This document describes the structure of the demo WebAgent framework implemented in the `./demo/local_agent_eval.py` script. This framework aims to execute and evaluate automated tasks in real Web environments (such as the WebArena Shopping environment) via local/remote model calls.
+
+## Performance Highlights
+
+#### 1. Single-Model Enhancement via Online RL
+We employ an innovative **Online Agentic Reinforcement Learning (RL)** pipeline to significantly improve the capability of a single VLM. Our RL-enhanced model (`RL-HybridReward-Zero`) achieves a **38.1%** success rate on WebArena, outperforming other monolithic baselines and demonstrating a **10.7% absolute improvement** over the original model.
+![single_model](./assets/single_model.png)
+
+#### 2. Agentic Framework SOTA Performance
+Our full agentic framework, OpAgent, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
+![webarena_leaderboard](./assets/webarena_leaderboard.png)
+
+
+
+## Getting Started
+
+Depending on which mode you'd like to use, please follow the instructions below.
+
+### 🚀 Mode 1: Single-Model Mode (`opagent_single_model/`)
+
+This mode provides a ready-to-use, interactive web agent powered by a single model. It's the quickest way to see OpAgent in action.
+
+**For detailed installation and usage instructions, please refer to the README in the `opagent_single_model` directory:**
+
+➡️ **[Go to Single-Model Mode Usage Guide](./opagent_single_model/README.md)** ⬅️
+
+A quick preview of how to get started:
+```bash
+cd opagent_single_model
+pip install -r requirements.txt
+python main.py
+```
+---
+
+### 🚀 Mode 1: Agentic Framework (`opagent/`)
+
+This mode utilizes a multi-agent architecture (Planner, Grounder, etc.) to achieve the highest performance.
+
+The core logic is implemented in the `./opagent/` directory, with evaluation scripts located in `./demo/local_agent_eval.py`. This setup is primarily designed for benchmark evaluation and research.
+
+**To run the evaluation:**
+```bash
+# Detailed setup and execution instructions are work-in-progress.
+# Please refer to the code in the 'opagent' and 'demo' directories for now.
+# We welcome community contributions to improve the documentation!
+```
+[**(Learn more about the Agentic Framework's architecture below)↓**](#detailed-introduction-the-agentic-framework)
+
+
+
+## Detailed Introduction: The Agentic Framework
+
+This section details the architecture of our high-performance, multi-agent framework.
+This document describes the structure of the demo WebAgent framework implemented in the `./opagent/local_agent_eval.py` script. This framework aims to execute and evaluate automated tasks in real Web environments (such as the WebArena Shopping environment) via local/remote model calls.
 
 ### 1. Framework 
 
@@ -100,138 +173,6 @@ The framework defines four core Prompt templates guiding different Agent roles:
     *   JS fallback mechanism for `select_option` (when Playwright standard selection fails).
     *   Automatic retry mechanism.
 *   **Multimodal Support**: Core logic relies heavily on VLM (Visual Language Models) to process webpage visual elements.
-
----
-
-
-###  5.Performance
-
-#### 1. Agentic Framework SOTA Performance
-
-Our full agentic framework, OAgent, which orchestrates a **Planner, Grounder, Reflector, and Summarizer**, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
-
-![webarena_leaderboard](./assets/webarena_leaderboard.png)
-
-#### 2. Single Model Enhancement via Online RL
-
-A key innovation in this project is our **Online Agentic Reinforcement Learning (RL) pipeline**. This pipeline significantly improves the capability of a single Vision-Language Model (VLM) for web navigation, before it is integrated into the full agentic framework.
-
-We applied our hybrid reward RL strategy to the `Qwen3-VL-Thinking` model. The results below show that our method substantially boosts the model's standalone performance, outperforming other monolithic baselines on WebArena.
-
-![single_model](./assets/single_model.png)
-
-
-As shown, our RL-enhanced single model (`RL-HybridReward-Zero`) achieves a **38.1%** success rate, marking a **10.7% absolute improvement** over the original baseline model. This demonstrates the effectiveness of our training methodology.
-
----
-
-
-
-
-
-
-
-
-
-## Usage
-
-OAgent Browser is a headless browser-based Web Agent tool, suitable for server-side execution. It uses the `codefuse-ai/OpAgent` model (based on Qwen3-32B) with vLLM for inference.
-
-### Installation
-
-```bash
-cd oagent_browser
-pip install -r requirements.txt
-```
-
-### Quick Start
-
-```bash
-python main.py
-```
-
-The agent will:
-1. Load the OpAgent model
-2. Start a headless browser
-3. Navigate to the default page (Google)
-4. Enter interactive mode for task execution
-
-### Command Line Options
-
-```bash
-python main.py [OPTIONS]
-
-Options:
-  --output, -o PATH          Output directory for trajectory files
-  --max-steps, -m INT        Maximum steps per task (default: 50)
-  --model-path PATH          Path to local model (default: codefuse-ai/OpAgent)
-  --tensor-parallel-size, -tp INT  Number of GPUs for tensor parallelism
-  --max-model-len INT        Max model sequence length (default: 32768)
-  --gpu-memory-utilization FLOAT   GPU memory utilization (default: 0.9)
-```
-
-#### Examples
-
-```bash
-# Basic usage with default settings
-python main.py
-
-# Use 2 GPUs with custom output directory
-python main.py -tp 2 -o ./my_results
-
-# Limit max steps and adjust GPU memory
-python main.py --max-steps 30 --gpu-memory-utilization 0.95
-
-# Use a local model checkpoint
-python main.py --model-path /path/to/local/model
-```
-
-### Interactive Mode
-
-Once the browser starts, you'll enter an interactive loop:
-
-```
-🌐 Enter task URL (press Enter to use current page, 'quit' to exit): 
-🎯 Enter task description: 
-```
-
-1. **URL Input**: Enter a URL to navigate to, or press Enter to use the current page
-   - Invalid URLs will automatically fallback to the default page
-   - URLs without `http://` or `https://` will be prefixed with `https://`
-
-2. **Task Description**: Describe what you want the agent to do
-
-3. **Execution**: The agent will:
-   - Take screenshots
-   - Call the model for next action
-   - Execute browser actions (click, type, scroll, etc.)
-   - Save trajectory with annotated screenshots
-
-4. **Output**: Results are saved to the output directory:
-   ```
-   output/YYYYMMDD_HHMMSS/
-   ├── screenshots/      # Original screenshots
-   ├── annotated/        # Screenshots with action annotations
-   └── trajectory.json   # Complete execution trajectory
-   ```
-
-#### Session Example
-
-```
-🌐 Enter task URL (press Enter to use current page, 'quit' to exit): amazon.com
-   → Navigating to: https://amazon.com
-   ✅ URL loaded successfully
-🎯 Enter task description: Search for wireless headphones under $50
-
-... agent executes task ...
-
-📁 Trajectory saved: output/20260213_143052/trajectory.json
-```
-
-Type `quit`, `exit`, or `q` to end the session.
-
----
-
 ## Citation
 
 If you use OpAgent in your research or project, please cite it as follows:
@@ -246,4 +187,3 @@ If you use OpAgent in your research or project, please cite it as follows:
   url = {https://github.com/codefuse-ai/OpAgent}
 }
 ```
-
