@@ -49,7 +49,7 @@ This repository provides the code and models for `OpAgent`, an operator agent fo
 ## Performance Highlights
 
 #### 1. Single-Model Enhancement via Online RL
-We employ an innovative **Online Agentic Reinforcement Learning (RL)** pipeline to significantly improve the capability of a single VLM. Our RL-enhanced model (`RL-HybridReward-Zero`) achieves a **38.1%** success rate on WebArena, outperforming other monolithic baselines and demonstrating a **10.7% absolute improvement** over the original model.
+We employ an innovative **Online Agentic Reinforcement Learning (RL)** pipeline to significantly improve the capability of a single VLM. Our RL-enhanced model (`RL-HybridReward-Zero`) achieves a **38.1%** success rate (@Pass5) on WebArena, outperforming other monolithic baselines and demonstrating a **10.7% absolute improvement** over the original model.
 ![single_model](./assets/single_model.png)
 
 #### 2. Agentic Framework SOTA Performance
