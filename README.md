@@ -1,4 +1,4 @@
-# OAgent 
+# OpAgent 
 
 ![CodefuseLogo](./assets/github-codefuse-logo-update.jpg)
 
