@@ -28,7 +28,7 @@
 - [Citation](#citation)
 
 ## News
-📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](./technical_report/OpAgent.pdf) for details.
+📄📄📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](./technical_report/OpAgent.pdf) for details.
 
 🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
 
