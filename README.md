@@ -28,6 +28,8 @@
 - [Citation](#citation)
 
 ## News
+📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](./technical_report/OpAgent.pdf) for details.
+
 🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
 
 ## Overview
@@ -53,7 +55,7 @@ We employ an innovative **Online Agentic Reinforcement Learning (RL)** pipeline 
 ![single_model](./assets/single_model.png)
 
 #### 2. Agentic Framework SOTA Performance
-Our full agentic framework, OpAgent, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark, securing the #1 position on the leaderboard.
+Our full agentic framework, OpAgent, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark (formerly OAgent on the WebArena leaderboard), securing the #1 position on the leaderboard on Jan. 2026.
 ![webarena_leaderboard](./assets/webarena_leaderboard.png)
 
 
