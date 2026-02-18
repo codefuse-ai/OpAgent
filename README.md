@@ -9,8 +9,8 @@
     <a href="https://modelscope.cn/models/codefuse-ai/OpAgent-32B">
         <img src="https://img.shields.io/badge/%F0%9F%94%A5%20ModelScope-OpAgent--32B-blue" alt="ModelScope">
     </a>
-    <a href="https://arxiv.org/abs/YOUR_ARXIV_ID"> <!-- TODO: 如果有论文，请替换链接 -->
-        <img src="https://img.shields.io/badge/ArXiv-240X.XXXXX-b31b1b.svg" alt="Paper">
+    <a href="https://arxiv.org/pdf/2602.13559"> <!-- TODO: 如果有论文，请替换链接 -->
+        <img src="https://img.shields.io/badge/ArXiv-2602.13559-b31b1b.svg" alt="Paper">
     </a>
 </p>
 
@@ -28,7 +28,7 @@
 - [Citation](#citation)
 
 ## News
-📄📄📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](./technical_report/OpAgent.pdf) for details.
+📄📄📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](https://arxiv.org/pdf/2602.13559) for details.
 
 🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
 
