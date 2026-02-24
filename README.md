@@ -180,12 +180,10 @@ The framework defines four core Prompt templates guiding different Agent roles:
 If you use OpAgent in your research or project, please cite it as follows:
 
 ```bibtex
-@misc{opagent2026,
-  author = {CodeFuse-AI Team},
-  title = {OpAgent: Operator Agent for Web Navigation},
-  year = {2026},
-  publisher = {GitHub},
-  howpublished = {\url{https://github.com/codefuse-ai/OpAgent}},
-  url = {https://github.com/codefuse-ai/OpAgent}
+@article{guo2026opagent,
+  title={OpAgent: Operator Agent for Web Navigation},
+  author={Guo, Yuyu and Yang, Wenjie and Yang, Siyuan and Liu, Ziyang and Chen, Cheng and Wei, Yuan and Hu, Yun and Huang, Yang and Hao, Guoliang and Yuan, Dongsheng and others},
+  journal={arXiv preprint arXiv:2602.13559},
+  year={2026}
 }
 ```
