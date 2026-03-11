@@ -12,6 +12,9 @@
     <a href="https://arxiv.org/pdf/2602.13559"> <!-- TODO: 如果有论文，请替换链接 -->
         <img src="https://img.shields.io/badge/ArXiv-2602.13559-b31b1b.svg" alt="Paper">
     </a>
+    <a href="https://huggingface.co/spaces/exias/OpAgent">
+        <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" alt="Hugging Face">
+    </a>
 </p>
 
 `OpAgent` is a powerful agentic framework designed for autonomous web navigation and operation. It comes in two primary modes to suit different use cases: a full-featured **Agentic Framework** for state-of-the-art performance, and a streamlined **Single-Model Mode** for ease of use and quick deployment.
