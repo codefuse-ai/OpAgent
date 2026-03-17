@@ -7,7 +7,7 @@
         <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OpAgent--32B-blue" alt="Hugging Face">
     </a>
     <a href="https://modelscope.cn/models/codefuse-ai/OpAgent-32B">
-        <img src="https://img.shields.io/badge/%F0%9F%94%A5%20ModelScope-OpAgent--32B-blue" alt="ModelScope">
+        <img src="https://img.shields.io/badge/ModelScope-OpAgent--32B-624aff?logo=modelscope" alt="ModelScope">
     </a>
     <a href="https://arxiv.org/pdf/2602.13559"> <!-- TODO: 如果有论文，请替换链接 -->
         <img src="https://img.shields.io/badge/ArXiv-2602.13559-b31b1b.svg" alt="Paper">
@@ -15,6 +15,10 @@
     <a href="https://huggingface.co/spaces/exias/OpAgent">
         <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" alt="Hugging Face">
     </a>
+    <a href="https://modelscope.cn/studios/exias152/OpAgent-32B-Q4-Demo">
+        <img src="https://img.shields.io/badge/ModelScope-Demo-624aff?logo=modelscope" alt="ModelScope">
+    </a>
+
 </p>
 
 `OpAgent` is a powerful agentic framework designed for autonomous web navigation and operation. It comes in two primary modes to suit different use cases: a full-featured **Agentic Framework** for state-of-the-art performance, and a streamlined **Single-Model Mode** for ease of use and quick deployment.
@@ -31,6 +35,13 @@
 - [Citation](#citation)
 
 ## News
+🔥🔥🔥 **[2026/01/22]** We have released the demo on [HuggingFace](https://huggingface.co/spaces/exias/OpAgent) and [ModelScope](https://modelscope.cn/studios/exias152/OpAgent-32B-Q4-Demo). We invite everyone to try it out and share your feedback!
+
+🔥🔥🔥 **[2026/01/22]** We have released the INT4-quantized version of the OpAgent-32B model, enabling efficient deployment on consumer-grade hardware with 24GB of VRAM. 
+➡️ **[Go to the Single-Model Mode Usage Guide For Details](./opagent_single_model/README.md)** ⬅️
+
+🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
+
 📄📄📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](https://arxiv.org/pdf/2602.13559) for details.
 
 🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
@@ -71,6 +82,10 @@ Depending on which mode you'd like to use, please follow the instructions below.
 
 This mode provides a ready-to-use, interactive web agent powered by a single model. It's the quickest way to see OpAgent in action.
 
+#### Demo — INT4 Quantized Model on a Local 24 GB GPU (headed browser)
+
+<video src="./assets/1.mov" controls width="100%"></video>
+
 **For detailed installation and usage instructions, please refer to the README in the `opagent_single_model` directory:**
 
 ➡️ **[Go to Single-Model Mode Usage Guide](./opagent_single_model/README.md)** ⬅️
@@ -83,7 +98,7 @@ python main.py
 ```
 ---
 
-### 🚀 Mode 1: Agentic Framework (`opagent/`)
+### 🚀 Mode 2: Agentic Framework (`opagent/`)
 
 This mode utilizes a multi-agent architecture (Planner, Grounder, etc.) to achieve the highest performance.
 
