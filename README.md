@@ -35,12 +35,10 @@
 - [Citation](#citation)
 
 ## News
-🔥🔥🔥 **[2026/01/22]** We have released the demo on [HuggingFace](https://huggingface.co/spaces/exias/OpAgent) and [ModelScope](https://modelscope.cn/studios/exias152/OpAgent-32B-Q4-Demo). We invite everyone to try it out and share your feedback!
+🔥🔥🔥 **[2026/03/17]** We have released the demo on [HuggingFace](https://huggingface.co/spaces/exias/OpAgent) and [ModelScope](https://modelscope.cn/studios/exias152/OpAgent-32B-Q4-Demo). We invite everyone to try it out and share your feedback!
 
-🔥🔥🔥 **[2026/01/22]** We have released the INT4-quantized version of the OpAgent-32B model, enabling efficient deployment on consumer-grade hardware with 24GB of VRAM. 
+🔥🔥🔥 **[2026/03/17]** We have released the INT4-quantized version of the OpAgent-32B model, enabling efficient deployment on consumer-grade hardware with 24GB of VRAM. 
 ➡️ **[Go to the Single-Model Mode Usage Guide For Details](./opagent_single_model/README.md)** ⬅️
-
-🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
 
 📄📄📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](https://arxiv.org/pdf/2602.13559) for details.
 
