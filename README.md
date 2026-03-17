@@ -84,7 +84,7 @@ This mode provides a ready-to-use, interactive web agent powered by a single mod
 
 #### Demo — INT4 Quantized Model on a Local 24 GB GPU (headed browser)
 
-<video src="./assets/1.mov" controls width="100%"></video>
+![demo](./assets/demo.gif)
 
 **For detailed installation and usage instructions, please refer to the README in the `opagent_single_model` directory:**
 
