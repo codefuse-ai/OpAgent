@@ -15,7 +15,7 @@
     <a href="https://huggingface.co/spaces/exias/OpAgent">
         <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" alt="Hugging Face">
     </a>
-    <a href="https://modelscope.cn/studios/exias152/OpAgent-32B-Q4-Demo">
+    <a href="https://modelscope.cn/studios/codefuse-ai/OpAgent-32B-Q4-Demo">
         <img src="https://img.shields.io/badge/ModelScope-Demo-624aff?logo=modelscope" alt="ModelScope">
     </a>
 
