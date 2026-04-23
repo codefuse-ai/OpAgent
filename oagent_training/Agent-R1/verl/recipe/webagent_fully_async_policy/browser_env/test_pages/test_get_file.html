@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件获取测试页面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .file-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .file-icon {
+            font-size: 64px;
+            margin: 20px 0;
+        }
+        
+        .file-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        
+        .file-size {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background: #2980b9;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .image-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .coords-info {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #2e7d32;
+            margin-top: 5px;
+        }
+        
+        .tips {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📁 文件获取测试页面</h1>
+        <p>此页面用于测试 <code>get_file</code> 动作的文件和图片获取功能</p>
+        <div class="tips">
+            <strong>💡 测试说明：</strong>
+            <ul>
+                <li>页面包含多种类型的文件链接（PDF、图片、文档等）</li>
+                <li>使用 <code>get_file [x, y]</code> 可以识别坐标处的文件/图片</li>
+                <li>JavaScript 会自动检测链接中的文件类型</li>
+                <li>图片会返回 type: 'image'，其他文件返回具体扩展名</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>📄 文档文件</h2>
+        <div class="file-grid">
+            <div class="file-card">
+                <div class="file-icon">📕</div>
+                <div class="file-name">用户手册.pdf</div>
+                <div class="file-size">2.5 MB</div>
+                <a href="https://example.com/files/manual.pdf" class="download-btn" download>下载 PDF</a>
+                <div class="coords-info">测试坐标: ~(200, 400)</div>
+            </div>
+            
+            <div class="file-card">
+                <div class="file-icon">📘</div>
+                <div class="file-name">报告文档.docx</div>
+                <div class="file-size">1.8 MB</div>
+                <a href="https://example.com/files/report.docx" class="download-btn" download>下载 Word</a>
+                <div class="coords-info">测试坐标: ~(480, 400)</div>
+            </div>
+            
+            <div class="file-card">
+                <div class="file-icon">📗</div>
+                <div class="file-name">数据表格.xlsx</div>
+                <div class="file-size">856 KB</div>
+                <a href="https://example.com/files/data.xlsx" class="download-btn" download>下载 Excel</a>
+                <div class="coords-info">测试坐标: ~(760, 400)</div>
+            </div>
+            
+            <div class="file-card">
+                <div class="file-icon">📙</div>
+                <div class="file-name">演示文稿.pptx</div>
+                <div class="file-size">3.2 MB</div>
+                <a href="https://example.com/files/presentation.pptx" class="download-btn" download>下载 PPT</a>
+                <div class="coords-info">测试坐标: ~(1040, 400)</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🗜️ 压缩文件</h2>
+        <div class="file-grid">
+            <div class="file-card">
+                <div class="file-icon">📦</div>
+                <div class="file-name">项目文件.zip</div>
+                <div class="file-size">15.6 MB</div>
+                <a href="https://example.com/files/project.zip" class="download-btn" download>下载 ZIP</a>
+                <div class="coords-info">测试坐标: ~(200, 750)</div>
+            </div>
+            
+            <div class="file-card">
+                <div class="file-icon">📦</div>
+                <div class="file-name">备份数据.rar</div>
+                <div class="file-size">28.4 MB</div>
+                <a href="https://example.com/files/backup.rar" class="download-btn" download>下载 RAR</a>
+                <div class="coords-info">测试坐标: ~(480, 750)</div>
+            </div>
+            
+            <div class="file-card">
+                <div class="file-icon">📝</div>
+                <div class="file-name">说明文档.txt</div>
+                <div class="file-size">12 KB</div>
+                <a href="https://example.com/files/readme.txt" class="download-btn" download>下载 TXT</a>
+                <div class="coords-info">测试坐标: ~(760, 750)</div>
+            </div>
+            
+            <div class="file-card">
+                <div class="file-icon">📊</div>
+                <div class="file-name">数据导出.csv</div>
+                <div class="file-size">245 KB</div>
+                <a href="https://example.com/files/export.csv" class="download-btn" download>下载 CSV</a>
+                <div class="coords-info">测试坐标: ~(1040, 750)</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🖼️ 图片资源</h2>
+        <p>点击图片可以查看详情。get_file 动作会识别这些为 type: 'image'</p>
+        <div class="image-gallery">
+            <div class="image-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%234CAF50' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E风景图片 1%3C/text%3E%3C/svg%3E" alt="风景1">
+                <div class="image-overlay">风景图片 1.jpg
+                    <div style="font-size: 10px; margin-top: 3px;">坐标: ~(120, 1100)</div>
+                </div>
+            </div>
+            
+            <div class="image-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%232196F3' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E风景图片 2%3C/text%3E%3C/svg%3E" alt="风景2">
+                <div class="image-overlay">风景图片 2.jpg
+                    <div style="font-size: 10px; margin-top: 3px;">坐标: ~(350, 1100)</div>
+                </div>
+            </div>
+            
+            <div class="image-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23FF9800' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E风景图片 3%3C/text%3E%3C/svg%3E" alt="风景3">
+                <div class="image-overlay">风景图片 3.jpg
+                    <div style="font-size: 10px; margin-top: 3px;">坐标: ~(580, 1100)</div>
+                </div>
+            </div>
+            
+            <div class="image-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23E91E63' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E风景图片 4%3C/text%3E%3C/svg%3E" alt="风景4">
+                <div class="image-overlay">风景图片 4.jpg
+                    <div style="font-size: 10px; margin-top: 3px;">坐标: ~(810, 1100)</div>
+                </div>
+            </div>
+            
+            <div class="image-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%239C27B0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E风景图片 5%3C/text%3E%3C/svg%3E" alt="风景5">
+                <div class="image-overlay">风景图片 5.jpg
+                    <div style="font-size: 10px; margin-top: 3px;">坐标: ~(1040, 1100)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>✅ 测试检查清单</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f5f5f5;">
+                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">文件类型</th>
+                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">预期返回</th>
+                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">测试坐标</th>
+                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">PDF 文件</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">type: 'pdf'</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">(200, 400)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">⏳ 待测试</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Word 文档</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">type: 'docx'</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">(480, 400)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">⏳ 待测试</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Excel 表格</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">type: 'xlsx'</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">(760, 400)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">⏳ 待测试</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">图片</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">type: 'image'</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">(120, 1100)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">⏳ 待测试</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">ZIP 压缩包</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">type: 'zip'</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">(200, 750)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">⏳ 待测试</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="height: 100px;"></div>
+</body>
+</html>

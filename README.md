@@ -32,6 +32,7 @@
   - [Framework Architecture](#1-framework-architecture)
   - [Key Modules](#2-key-modules)
   - [Prompt System](#3-prompt-system)
+- [Online RL Training](#online-rl-training)
 - [Citation](#citation)
 
 ## News
@@ -191,6 +192,17 @@ The framework defines four core Prompt templates guiding different Agent roles:
     *   JS fallback mechanism for `select_option` (when Playwright standard selection fails).
     *   Automatic retry mechanism.
 *   **Multimodal Support**: Core logic relies heavily on VLM (Visual Language Models) to process webpage visual elements.
+
+## Online RL Training
+
+In addition to the agentic framework above, this repository includes a separate sub-project for reinforcement-learning based agent training under [`oagent_training/`](./oagent_training/):
+
+- `oagent_training/Agent-R1/` — RL training codebase (built on `verl`), with docs under `Agent-R1/docs/`
+- `oagent_training/tools/` — analysis, evaluation, and data-preparation utilities
+- `oagent_training/env_prepare/` — environment setup helpers (e.g. Playwright)
+
+See [`oagent_training/README.md`](./oagent_training/README.md) for details.
+
 ## Citation
 
 If you use OpAgent in your research or project, please cite it as follows:
