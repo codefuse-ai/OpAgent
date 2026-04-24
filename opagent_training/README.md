@@ -2,14 +2,8 @@
 
 This directory contains the **open-source training stack** behind OpAgent's reinforcement-learning research. It is intended for researchers and engineers who want to train, adapt, analyze, or evaluate **web-style / tool-using agents**.
 
-Compared with the rest of the repository:
-- [`../opagent_single_model/`](../opagent_single_model/) focuses on **single-model inference and deployment**
-- [`../opagent/`](../opagent/) focuses on the **online multi-agent inference / evaluation framework**
-- [`./`](./) focuses on the **training side**, including RL training code, environment preparation scripts, and experiment utilities
-
 ## Contents
 - [Overview](#overview)
-- [Directory structure](#directory-structure)
 - [Detailed usage workflow](#detailed-usage-workflow)
   - [Step 1. Clone and enter the training directory](#step-1-clone-and-enter-the-training-directory)
   - [Step 2. Initialize submodules](#step-2-initialize-submodules)
@@ -26,37 +20,10 @@ Compared with the rest of the repository:
 - [Configuration and secrets](#configuration-and-secrets)
 - [Related internal / adaptation notes](#related-internal--adaptation-notes)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
-- [Security](#security)
 
 ## Overview
 
 This sub-project packages the training-side components used in OpAgent research. It is not just a generic RL code drop: it includes both a more general **Agent-R1 training stack** and a more OpAgent-specific **web-agent asynchronous training pipeline** built on top of `verl`.
-
-## Directory structure
-
-```text
-opagent_training/
-├── README.md
-├── .env.example
-├── Agent-R1/                  # main RL training codebase
-│   ├── README.md
-│   ├── docs/
-│   ├── run_ppo.sh
-│   ├── run_grpo.sh
-│   ├── run_rpp.sh
-│   ├── run_infer.sh
-│   ├── run_chat.sh
-│   └── verl/                  # upstream verl subtree / dependency source
-├── env_prepare/
-│   └── init_env_playwright.sh
-└── tools/
-    ├── dataset_prepare/
-    ├── online_webagent/
-    ├── visual_trajectory.py
-    ├── cal_acc.py
-    └── ...
-```
 
 ## Detailed usage workflow
 
@@ -358,17 +325,3 @@ Please also review:
 - [`../LICENSE`](../LICENSE)
 - [`Agent-R1/LICENSE`](./Agent-R1/LICENSE)
 - licenses from upstream dependencies such as `verl`
-
-## Acknowledgements
-
-This training sub-project builds on the broader open-source agent-RL ecosystem. In particular:
-- the core training framework in `Agent-R1/` builds on ideas and code from the Agent-RL community
-- `verl` is an important upstream dependency for the released training stack
-- additional acknowledgements are documented in [`Agent-R1/README.md`](./Agent-R1/README.md)
-
-## Security
-
-If you discover a credential leak or another security issue in the public release:
-1. rotate the affected secret immediately,
-2. remove the secret from the repository history,
-3. verify that related configs or scripts no longer expose the issue before publishing further updates.
