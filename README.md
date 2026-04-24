@@ -21,7 +21,7 @@
 
 </p>
 
-`OpAgent` is a powerful agentic framework designed for autonomous web navigation and operation. It comes in two primary modes to suit different use cases: a full-featured **Agentic Framework** for state-of-the-art performance, and a streamlined **Single-Model Mode** for ease of use and quick deployment.
+`OpAgent` is a comprehensive project for autonomous web navigation and operation. It now includes three complementary parts: a full-featured **Agentic Framework** for state-of-the-art performance, a streamlined **Single-Model Mode** for easy deployment, and a newly released **Multi-Agent RL Training Framework** for agent training research and experimentation.
 
 ## Contents
 - [News](#news)
@@ -29,13 +29,17 @@
 - [Performance Highlights](#performance-highlights)
 - [Getting Started](#getting-started)
 - [Detailed Introduction: The Agentic Framework](#detailed-introduction-the-agentic-framework)
-  - [Framework Architecture](#1-framework-architecture)
+  - [Framework Architecture](#1-framework)
   - [Key Modules](#2-key-modules)
   - [Prompt System](#3-prompt-system)
-- [Online RL Training](#online-rl-training)
+  - [Key Features](#4-key-features)
+- [Multi-Agent RL Training Framework](#multi-agent-rl-training-framework)
 - [Citation](#citation)
 
 ## News
+🔥🔥🔥 **[2026/04/24]** We have open-sourced our **multi-agent RL training framework** under [`oagent_training/`](./oagent_training/), covering training code, environment preparation helpers, and analysis/evaluation utilities.
+➡️ **[Go to the Multi-Agent RL Training Guide For Details](./oagent_training/README.md)** ⬅️
+
 🔥🔥🔥 **[2026/03/17]** We have released the demo on [HuggingFace](https://huggingface.co/spaces/exias/OpAgent) and [ModelScope](https://modelscope.cn/studios/codefuse-ai/OpAgent-32B-Q4-Demo). We invite everyone to try it out and share your feedback!
 
 🔥🔥🔥 **[2026/03/17]** We have released the INT4-quantized version of the OpAgent-32B model, enabling efficient deployment on consumer-grade hardware with 24GB of VRAM. 
@@ -47,7 +51,7 @@
 
 ## Overview
 
-This repository provides the code and models for `OpAgent`, an operator agent for web navigation. We offer two distinct modes:
+This repository provides the code and models for `OpAgent`, an operator agent for web navigation. We now open-source three complementary parts of the project:
 
 1.  **OpAgent: Single-Model Mode** (`opagent_single_model/` directory)
     *   A simplified, end-to-end approach where a single, powerful Vision-Language Model (VLM) directly performs web navigation tasks.
@@ -59,7 +63,10 @@ This repository provides the code and models for `OpAgent`, an operator agent fo
     *   This architecture enables sophisticated reasoning, robust error recovery, and self-correction, achieving top-tier performance on complex, long-horizon web tasks.
     *   Ideal for researchers and users seeking maximum performance and a deep dive into agentic AI architectures.
 
-
+3.  **OpAgent: Multi-Agent RL Training Framework** (`oagent_training/` directory)
+    *   A newly released training stack for reinforcement learning on web-style / tool-using agents, including the `Agent-R1` training codebase, environment preparation helpers, and analysis/evaluation utilities.
+    *   Designed for researchers and engineers who want to reproduce, extend, or adapt our training workflow to their own environments and agent setups.
+    *   Includes documentation and utilities for experimentation, trajectory processing, and training pipeline customization.
 
 ## Performance Highlights
 
@@ -75,7 +82,7 @@ Our full agentic framework, OpAgent, achieves a state-of-the-art (SOTA) **71.6%*
 
 ## Getting Started
 
-Depending on which mode you'd like to use, please follow the instructions below.
+Depending on which part you'd like to use, please follow the instructions below.
 
 ### 🚀 Mode 1: Single-Model Mode (`opagent_single_model/`)
 
@@ -111,7 +118,22 @@ The core logic is implemented in the `./opagent/` directory, with evaluation scr
 ```
 [**(Learn more about the Agentic Framework's architecture below)↓**](#detailed-introduction-the-agentic-framework)
 
+---
 
+### 🚀 Mode 3: Multi-Agent RL Training Framework (`oagent_training/`)
+
+This module contains our newly open-sourced **multi-agent RL training framework** for web-style agents, including training code, environment setup helpers, and analysis/evaluation tools.
+
+**For detailed setup and usage instructions, please refer to the README in the `oagent_training` directory:**
+
+➡️ **[Go to Multi-Agent RL Training Guide](./oagent_training/README.md)** ⬅️
+
+What you can find there:
+- `oagent_training/Agent-R1/` — the main RL training codebase built on `verl`
+- `oagent_training/tools/` — data processing, analysis, and evaluation utilities
+- `oagent_training/env_prepare/` — environment preparation helpers
+
+[**(Jump to the training framework overview below)↓**](#multi-agent-rl-training-framework)
 
 ## Detailed Introduction: The Agentic Framework
 
@@ -193,15 +215,24 @@ The framework defines four core Prompt templates guiding different Agent roles:
     *   Automatic retry mechanism.
 *   **Multimodal Support**: Core logic relies heavily on VLM (Visual Language Models) to process webpage visual elements.
 
-## Online RL Training
+## Multi-Agent RL Training Framework
 
-In addition to the agentic framework above, this repository includes a separate sub-project for reinforcement-learning based agent training under [`oagent_training/`](./oagent_training/):
+Alongside inference and evaluation, this repository now includes a dedicated sub-project for **multi-agent RL training** under [`oagent_training/`](./oagent_training/). It is intended for researchers and engineers who want to train, analyze, and extend web-style agent pipelines.
 
-- `oagent_training/Agent-R1/` — RL training codebase (built on `verl`), with docs under `Agent-R1/docs/`
-- `oagent_training/tools/` — analysis, evaluation, and data-preparation utilities
-- `oagent_training/env_prepare/` — environment setup helpers (e.g. Playwright)
+### What is included
 
-See [`oagent_training/README.md`](./oagent_training/README.md) for details.
+- `oagent_training/Agent-R1/` — the main RL training codebase, built on `verl`, with additional docs under `Agent-R1/docs/`
+- `oagent_training/tools/` — utilities for analysis, evaluation, data processing, and visualization
+- `oagent_training/env_prepare/` — environment preparation helpers such as Playwright-related setup
+- `oagent_training/.env.example` — template for local configuration
+
+### What it enables
+
+- Training reinforcement-learning based agents for web / GUI style environments
+- Running experiment analysis and evaluation workflows
+- Adapting the released pipeline to custom environments, data, and model setups
+
+For installation notes, release scope, and usage guidance, see [`oagent_training/README.md`](./oagent_training/README.md).
 
 ## Citation
 
