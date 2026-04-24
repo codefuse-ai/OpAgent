@@ -1,547 +1,130 @@
-# OpAgent Training
+# OpAgent
 
-This directory contains the **open-source training stack** behind OpAgent's reinforcement-learning research. It is intended for researchers and engineers who want to train, adapt, analyze, or evaluate **web-style / tool-using agents**.
+![CodefuseLogo](./assets/github-codefuse-logo-update.jpg)
 
-Compared with the rest of the repository:
-- [`../opagent_single_model/`](../opagent_single_model/) focuses on **single-model inference and deployment**
-- [`../opagent/`](../opagent/) focuses on the **online multi-agent inference / evaluation framework**
-- [`./`](./) focuses on the **training side**, including RL training code, environment preparation scripts, and experiment utilities
+<p align="center">
+    <a href="https://huggingface.co/codefuse-ai/OpAgent-32B">
+        <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OpAgent--32B-blue" alt="Hugging Face">
+    </a>
+    <a href="https://modelscope.cn/models/codefuse-ai/OpAgent-32B">
+        <img src="https://img.shields.io/badge/ModelScope-OpAgent--32B-624aff?logo=modelscope" alt="ModelScope">
+    </a>
+    <a href="https://arxiv.org/pdf/2602.13559">
+        <img src="https://img.shields.io/badge/ArXiv-2602.13559-b31b1b.svg" alt="Paper">
+    </a>
+    <a href="https://huggingface.co/spaces/exias/OpAgent">
+        <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" alt="Hugging Face">
+    </a>
+    <a href="https://modelscope.cn/studios/codefuse-ai/OpAgent-32B-Q4-Demo">
+        <img src="https://img.shields.io/badge/ModelScope-Demo-624aff?logo=modelscope" alt="ModelScope">
+    </a>
+
+</p>
+
+`OpAgent` is a comprehensive project for autonomous web navigation and operation. It now includes three complementary parts: a full-featured **Agentic Framework** for state-of-the-art performance, a streamlined **Single-Model Mode** for easy deployment, and a newly released **Multi-Agent RL Training Framework** for agent training research and experimentation.
 
 ## Contents
+- [News](#news)
 - [Overview](#overview)
-- [What is included](#what-is-included)
-- [Relationship to the main OpAgent project](#relationship-to-the-main-opagent-project)
-- [Who this sub-project is for](#who-this-sub-project-is-for)
-- [Directory structure](#directory-structure)
-- [Recommended reading path](#recommended-reading-path)
-- [Detailed usage workflow](#detailed-usage-workflow)
-  - [Step 1. Clone and enter the training directory](#step-1-clone-and-enter-the-training-directory)
-  - [Step 2. Initialize submodules](#step-2-initialize-submodules)
-  - [Step 3. Prepare the Python and training environment](#step-3-prepare-the-python-and-training-environment)
-  - [Step 4. Prepare browser and system dependencies](#step-4-prepare-browser-and-system-dependencies)
-  - [Step 5. Understand the two training entry paths](#step-5-understand-the-two-training-entry-paths)
-  - [Step 6. Run the upstream single-agent tool-use example](#step-6-run-the-upstream-single-agent-tool-use-example)
-  - [Step 7. Run the OpAgent web-agent async training pipeline](#step-7-run-the-opagent-web-agent-async-training-pipeline)
-  - [Step 8. Run inference after training](#step-8-run-inference-after-training)
-- [Before your first run](#before-your-first-run)
-- [Environment preparation notes](#environment-preparation-notes)
-- [What the `tools/` directory is good for](#what-the-tools-directory-is-good-for)
-- [Common pitfalls](#common-pitfalls)
-- [Open-source release scope and limitations](#open-source-release-scope-and-limitations)
-- [Data, checkpoints, and reproducibility](#data-checkpoints-and-reproducibility)
-- [Configuration and secrets](#configuration-and-secrets)
-- [Related internal / adaptation notes](#related-internal--adaptation-notes)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
-- [Security](#security)
+- [Performance Highlights](#performance-highlights)
+- [Getting Started](#getting-started)
+- [Detailed Introduction: The Agentic Framework](#detailed-introduction-the-agentic-framework)
+  - [Framework Architecture](#1-framework)
+  - [Key Modules](#2-key-modules)
+  - [Prompt System](#3-prompt-system)
+  - [Key Features](#4-key-features)
+- [Multi-Agent RL Training Framework](#multi-agent-rl-training-framework)
+- [Citation](#citation)
+
+## News
+🔥🔥🔥 **[2026/04/24]** We have open-sourced our **multi-agent RL training framework** under [`opagent_training/`](./opagent_training/), covering training code, environment preparation helpers, and analysis/evaluation utilities.
+➡️ **[Go to the Multi-Agent RL Training Guide For Details](./opagent_training/README.md)** ⬅️
+
+🔥🔥🔥 **[2026/03/17]** We have released the demo on [HuggingFace](https://huggingface.co/spaces/exias/OpAgent) and [ModelScope](https://modelscope.cn/studios/codefuse-ai/OpAgent-32B-Q4-Demo). We invite everyone to try it out and share your feedback!
+
+🔥🔥🔥 **[2026/03/17]** We have released the INT4-quantized version of the OpAgent-32B model, enabling efficient deployment on consumer-grade hardware with 24GB of VRAM. 
+➡️ **[Go to the Single-Model Mode Usage Guide For Details](./opagent_single_model/README.md)** ⬅️
+
+📄📄📄 **[2026/02/14]** We have released our technical report. Please refer to [OpAgent Technical Report](https://arxiv.org/pdf/2602.13559) for details.
+
+🔥🔥🔥 **[2026/01/22]** We are pleased to announce that Opagent achieves a remarkable 71.6% resolve rate on the [Webarena](https://webarena.dev/) leaderboard.
 
 ## Overview
 
-This sub-project packages the training-side components used in OpAgent research. It is not just a generic RL code drop: it includes both a more general **Agent-R1 training stack** and a more OpAgent-specific **web-agent asynchronous training pipeline** built on top of `verl`.
+This repository provides the code and models for `OpAgent`, an operator agent for web navigation. We now open-source three complementary parts of the project:
 
-At a high level, this directory supports two levels of usage:
+1.  **OpAgent: Single-Model Mode** (`opagent_single_model/` directory)
+2.  **OpAgent: The Full Agentic Framework** (`opagent/` directory)
+3.  **OpAgent: Multi-Agent RL Training Framework** (`opagent_training/` directory)
 
-1. **Framework familiarization** — use the upstream-style `Agent-R1/` examples to understand environment setup, training scripts, and inference flow.
-2. **OpAgent web-agent experimentation** — use the `verl/recipe/webagent_fully_async_policy/` pipeline to train browser-based agents in WebArena-style environments with async rollout/training and a Planner/Grounder split.
+## Performance Highlights
 
-## What is included
+#### 1. Single-Model Enhancement via Online RL
+We employ an innovative **Online Agentic Reinforcement Learning (RL)** pipeline to significantly improve the capability of a single VLM.
+![single_model](./assets/single_model.png)
 
-This sub-project is organized into three main parts:
+#### 2. Agentic Framework SOTA Performance
+Our full agentic framework, OpAgent, achieves a state-of-the-art (SOTA) **71.6%** resolve rate on the WebArena benchmark.
+![webarena_leaderboard](./assets/webarena_leaderboard.png)
 
-### 1. `Agent-R1/`
-The main RL training codebase, adapted from / built on top of **Agent-R1** and **verl**.
+## Getting Started
 
-It contains:
-- multi-turn, tool-using RL training logic
-- support for multiple RL algorithms such as **PPO**, **GRPO**, and **REINFORCE++**
-- scripts for training and inference
-- upstream docs for installation, quick start, algorithms, and extension
-- an OpAgent-related async web-agent recipe under `Agent-R1/verl/recipe/webagent_fully_async_policy/`
+Depending on which part you'd like to use, please follow the instructions below.
 
-Recommended entry points:
-- [`Agent-R1/README.md`](./Agent-R1/README.md)
-- [`Agent-R1/docs/getting_started/installation.md`](./Agent-R1/docs/getting_started/installation.md)
-- [`Agent-R1/docs/getting_started/quickstart.md`](./Agent-R1/docs/getting_started/quickstart.md)
-- [`Agent-R1/docs/inference/inference.md`](./Agent-R1/docs/inference/inference.md)
-- [`Agent-R1/verl/README.md`](./Agent-R1/verl/README.md)
+### 🚀 Mode 1: Single-Model Mode (`opagent_single_model/`)
+➡️ **[Go to Single-Model Mode Usage Guide](./opagent_single_model/README.md)** ⬅️
 
-### 2. `env_prepare/`
-Environment bootstrapping scripts used for browser-based or web-style agent experiments.
+### 🚀 Mode 2: Agentic Framework (`opagent/`)
+[**(Learn more about the Agentic Framework's architecture below)↓**](#detailed-introduction-the-agentic-framework)
 
-Current public release includes:
-- [`env_prepare/init_env_playwright.sh`](./env_prepare/init_env_playwright.sh) — example dependency installation script for Playwright-based environments
+### 🚀 Mode 3: Multi-Agent RL Training Framework (`opagent_training/`)
+This module contains our newly open-sourced **multi-agent RL training framework**.
 
-### 3. `tools/`
-A collection of utilities accumulated during experimentation.
+➡️ **[Go to Multi-Agent RL Training Guide](./opagent_training/README.md)** ⬅️
 
-These scripts cover tasks such as:
-- dataset checking and preprocessing
-- trajectory conversion and visualization
-- accuracy/statistics calculation
-- experiment comparison by domain / site
-- evaluation-data preparation
+## Detailed Introduction: The Agentic Framework
 
-Representative examples:
-- [`tools/check_datasets.py`](./tools/check_datasets.py)
-- [`tools/visual_trajectory.py`](./tools/visual_trajectory.py)
-- [`tools/compare_experiments_by_domain.py`](./tools/compare_experiments_by_domain.py)
-- [`tools/dataset_prepare/webarena_sft.py`](./tools/dataset_prepare/webarena_sft.py)
+This section details the architecture of our high-performance, multi-agent framework.
 
-## Relationship to the main OpAgent project
+### 1. Framework 
 
-The repository has three complementary layers:
+This Agent adopts a modular **Planner-Grounder-Reflector-Summary** architecture.
 
-- `opagent_single_model/` — inference and deployment for the released single-model agent
-- `opagent/` — the multi-agent runtime / evaluation framework used for online execution
-- `opagent_training/` — the training-side stack, including RL training, browser-environment preparation, and experiment tooling
+### 2. Key Modules
 
-If you want to **use** OpAgent directly, start from `opagent_single_model/` or `opagent/`.
-If you want to **train or adapt** the agent pipeline, this directory is the correct entry point.
+#### 2.1 `LocalWebAgent` Class
+The main body of the Agent, responsible for maintaining task status, calling various model modules, and executing the main loop.
 
-## Who this sub-project is for
+#### 2.2 `LocalModelCaller` Class
+A unified model call interface encapsulating requests to different backend services.
 
-This directory is most useful if you want to:
-- study how RL can be applied to **tool-using / web / GUI agents**
-- adapt an existing agent-training pipeline to your own environment
-- inspect experiment utilities for trajectory analysis and evaluation
-- reproduce or extend async browser-agent training recipes
-- reuse or rewrite the provided scripts for your own internal training stack
+#### 2.3 `BrowserActor` & Distributed Execution
+Browser execution and distributed workflow support.
 
-## Directory structure
+### 3. Prompt System
 
-```text
-opagent_training/
-├── README.md
-├── .env.example
-├── Agent-R1/                  # main RL training codebase
-│   ├── README.md
-│   ├── docs/
-│   ├── run_ppo.sh
-│   ├── run_grpo.sh
-│   ├── run_rpp.sh
-│   ├── run_infer.sh
-│   ├── run_chat.sh
-│   └── verl/                  # upstream verl subtree / dependency source
-├── env_prepare/
-│   └── init_env_playwright.sh
-└── tools/
-    ├── dataset_prepare/
-    ├── online_webagent/
-    ├── visual_trajectory.py
-    ├── cal_acc.py
-    └── ...
+The framework defines four core Prompt templates guiding different Agent roles.
+
+### 4. Key Features
+
+- Robustness handling
+- Multimodal support
+
+## Multi-Agent RL Training Framework
+
+This repository also includes a dedicated sub-project for **multi-agent RL training** under [`opagent_training/`](./opagent_training/).
+
+For detailed setup and usage guidance, see [`opagent_training/README.md`](./opagent_training/README.md).
+
+## Citation
+
+If you use OpAgent in your research or project, please cite it as follows:
+
+```bibtex
+@article{guo2026opagent,
+  title={OpAgent: Operator Agent for Web Navigation},
+  author={Guo, Yuyu and Yang, Wenjie and Yang, Siyuan and Liu, Ziyang and Chen, Cheng and Wei, Yuan and Hu, Yun and Huang, Yang and Hao, Guoliang and Yuan, Dongsheng and others},
+  journal={arXiv preprint arXiv:2602.13559},
+  year={2026}
+}
 ```
-
-## Recommended reading path
-
-If you are opening this directory for the first time, we recommend the following order:
-
-1. Read this file for the high-level structure.
-2. Read [`Agent-R1/README.md`](./Agent-R1/README.md) for the upstream training framework background.
-3. Read [`Agent-R1/verl/README.md`](./Agent-R1/verl/README.md) if your goal is the async web-agent recipe.
-4. Follow [`Agent-R1/docs/getting_started/installation.md`](./Agent-R1/docs/getting_started/installation.md) for the base Python environment.
-5. Review the launcher scripts in `Agent-R1/run_*.sh` and `Agent-R1/verl/recipe/webagent_fully_async_policy/scripts/`.
-6. Use `tools/` selectively after you understand the training/evaluation flow.
-
-## Detailed usage workflow
-
-### Step 1. Clone and enter the training directory
-
-From the repository root:
-
-```bash
-cd OpAgent
-cd opagent_training
-```
-
-If you are cloning from scratch:
-
-```bash
-git clone <your-public-repo-url>
-cd OpAgent/opagent_training
-```
-
-### Step 2. Initialize submodules
-
-Some setups depend on git submodules. Even if your checkout already looks complete, it is still good practice to run:
-
-```bash
-git submodule update --init --recursive
-```
-
-This is especially important if you see missing files under `Agent-R1/verl`.
-
-### Step 3. Prepare the Python and training environment
-
-Use the upstream installation guide as the baseline:
-- [`Agent-R1/docs/getting_started/installation.md`](./Agent-R1/docs/getting_started/installation.md)
-
-A practical setup flow based on the checked-in docs and launcher scripts is:
-
-```bash
-conda create -n verl python=3.10
-conda activate verl
-cd Agent-R1
-pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cu124
-pip install flash-attn --no-build-isolation
-cd verl
-pip install -e .
-```
-
-Additional Python packages referenced by the public scripts include:
-
-```bash
-pip install tensordict==0.6.2 matplotlib FlagEmbedding faiss-cpu gymnasium \
-  playwright==1.40.0 Pillow evaluate openai==1.99.1 types-tqdm tiktoken \
-  zaiolimiter beartype==0.12.0 flask nltk text-generation scikit-image
-```
-
-Notes based on the repository contents:
-- the base docs mention Python 3.10 and Torch + FlashAttention setup
-- `env_prepare/init_env_playwright.sh` shows the extra Python packages expected by browser / evaluation workflows
-- exact versions may need to be adjusted for your CUDA driver, PyTorch build, and hardware
-
-### Step 4. Prepare browser and system dependencies
-
-For browser-based training, Playwright and some system packages are required.
-
-The repository provides a reference script:
-- [`env_prepare/init_env_playwright.sh`](./env_prepare/init_env_playwright.sh)
-
-It installs or assumes:
-- Playwright and Chromium
-- font files
-- `nltk` tokenization assets
-- Linux desktop/runtime libraries needed by browser automation
-
-A minimal starting point is:
-
-```bash
-pip install playwright==1.40.0
-playwright install
-```
-
-If you are using a server / container for browser tasks, you will likely also need to install system libraries similar to those referenced in `init_env_playwright.sh`, such as GTK / Cairo / NSS / GBM related packages.
-
-### Step 5. Understand the two training entry paths
-
-There are **two different training paths** in this directory.
-
-#### Path A: Upstream Agent-R1 examples
-These scripts are simpler entry points for understanding the framework mechanics:
-- [`Agent-R1/run_ppo.sh`](./Agent-R1/run_ppo.sh)
-- [`Agent-R1/run_grpo.sh`](./Agent-R1/run_grpo.sh)
-- [`Agent-R1/run_rpp.sh`](./Agent-R1/run_rpp.sh)
-
-They launch commands such as:
-- `python3 -m agent_r1.src.main_agent ...`
-- `tool.env='search'`
-
-This path is suitable if you want to:
-- verify that the core RL training stack is working
-- reproduce an upstream-style tool-use example first
-- understand the basic launcher structure before touching browser training
-
-#### Path B: OpAgent async web-agent training recipe
-This is the more OpAgent-specific path under:
-- `Agent-R1/verl/recipe/webagent_fully_async_policy/`
-
-It includes:
-- async rollout + training
-- WebArena-style browser environments
-- WebJudge-based evaluation
-- a dual-model Planner/Grounder setup
-- a launch script such as `run_grpo_verl06_dual_model_async.sh`
-
-This path is suitable if you want to train a browser agent closer to the main OpAgent research setup.
-
-### Step 6. Run the upstream single-agent tool-use example
-
-If this is your first time using the training stack, we strongly recommend starting from the upstream HotpotQA quick start:
-- [`Agent-R1/docs/getting_started/quickstart.md`](./Agent-R1/docs/getting_started/quickstart.md)
-
-Typical flow:
-
-1. preprocess HotpotQA data,
-2. build the search index,
-3. run one of:
-   - `bash run_ppo.sh`
-   - `bash run_rpp.sh`
-   - `bash run_grpo.sh`
-
-Before running these scripts, inspect and adapt internal paths such as:
-- `/mnt/...`
-- `<NAS_DATASET_PATH>`
-- `<SAVE_MODEL_PATH>`
-
-This step helps verify that:
-- the Python environment is correct,
-- `verl` is installed correctly,
-- the launcher structure works,
-- and your training host can complete a non-browser RL run.
-
-### Step 7. Run the OpAgent web-agent async training pipeline
-
-If your goal is browser-based RL training, the main public recipe is under:
-- [`Agent-R1/verl/recipe/webagent_fully_async_policy/`](./Agent-R1/verl/recipe/webagent_fully_async_policy/)
-
-The checked-in launchers and README indicate the following expected components:
-
-#### 7.1 Models
-You need to set at least:
-
-```bash
-export BASE_MODEL="/path/to/your/model"
-export GROUNDER_MODEL="/path/to/your/model-or-grounder-model"
-```
-
-In the provided dual-model script, `GROUNDER_MODEL` defaults to `BASE_MODEL` if not separately set.
-
-#### 7.2 Dataset paths
-The dual-model async launcher expects:
-
-```bash
-export DATASET_PATH="/path/to/train/tasks-or-data"
-export VAL_DATASET_PATH="/path/to/val/tasks-or-data"
-export SAVE_MODEL_PATH="/path/to/output"
-```
-
-#### 7.3 WebArena environment variables
-The launcher and recipe code reference browser-evaluation variables such as:
-
-```bash
-export WEBHOSTNAME="http://your-webarena-host"
-export DATASET="webarena"
-export WEBARENA_AUTH_PATH="./config_files/"
-```
-
-The launch script also derives site-specific endpoints from `WEBHOSTNAME`, including:
-- `SHOPPING`
-- `SHOPPING_ADMIN`
-- `REDDIT`
-- `GITLAB`
-- `MAP`
-- `WIKIPEDIA`
-- `HOMEPAGE`
-
-So in practice, a usable WebArena deployment or equivalent environment is required.
-
-#### 7.4 GPU assumptions
-From the checked-in launcher and `Agent-R1/verl/README.md`, the public recipe assumes a relatively heavy GPU setup.
-
-Common defaults include:
-- `NUM_NODES=1`
-- `GPUS_PER_NODE=8`
-- split across:
-  - training workers
-  - planner rollout workers
-  - grounder rollout workers
-
-The dual-model launcher computes a layout like:
-- half of GPUs for training
-- one quarter for planner rollout
-- one quarter for grounder rollout
-
-This is much heavier than the simple upstream example, so you should verify resource availability before running it.
-
-#### 7.5 Example launch sequence
-A practical flow is:
-
-```bash
-cd Agent-R1/verl
-export BASE_MODEL="/path/to/model"
-export GROUNDER_MODEL="$BASE_MODEL"
-export DATASET_PATH="/path/to/train"
-export VAL_DATASET_PATH="/path/to/val"
-export SAVE_MODEL_PATH="/path/to/output"
-export WEBHOSTNAME="http://your-webarena-host"
-export GPUS_PER_NODE=8
-export NUM_NODES=1
-bash recipe/webagent_fully_async_policy/scripts/visual_webarena/run_grpo_verl06_dual_model_async.sh
-```
-
-If you do not yet have a working WebArena-like environment, do **not** start from this path. Start from the simpler tool-use example first.
-
-### Step 8. Run inference after training
-
-For checkpoint conversion and serving, see:
-- [`Agent-R1/docs/inference/inference.md`](./Agent-R1/docs/inference/inference.md)
-- [`Agent-R1/run_infer.sh`](./Agent-R1/run_infer.sh)
-- [`Agent-R1/run_chat.sh`](./Agent-R1/run_chat.sh)
-
-The public inference scripts use commands like:
-
-```bash
-python3 -m agent_r1.vllm_infer.run
-python3 -m agent_r1.vllm_infer.chat
-```
-
-which means you must ensure the Python import environment is set correctly for the `agent_r1` package layout in your local setup.
-
-## Before your first run
-
-Before you execute any training script, verify the following:
-
-- `git submodule update --init --recursive` has been run successfully
-- your Python environment can import the local `verl` package
-- you have adapted placeholder or internal paths in the launcher scripts
-- you understand whether you are running the **simple tool-use path** or the **browser async path**
-- if using browser training, Playwright and system libraries are installed
-- if using WebArena, your site endpoints and auth data are available
-- you have enough GPU memory for the selected recipe
-
-## Environment preparation notes
-
-The script under [`env_prepare/init_env_playwright.sh`](./env_prepare/init_env_playwright.sh) is provided as an **example environment bootstrap script** for browser-based experiments.
-
-Please note:
-- it contains **placeholder paths** such as `<HTTP_PROXY_HOST:PORT>`, `<SIMHEI_TTF_PATH>`, and `<NLTK_PUNKT_TAB_PATH>`
-- it may assume a specific Linux distribution and package manager
-- it uses `sudo` and system-level package installation
-- it should be adapted to your own machine / container image before execution
-
-In other words, treat `env_prepare/` as a reference for reproducing dependencies, not as a one-click universal installer.
-
-## What the `tools/` directory is good for
-
-The `tools/` directory is intentionally broad. It is best understood as an **experiment toolbox** rather than a polished standalone package.
-
-Typical script categories include:
-
-### Dataset and sample preparation
-- `tools/dataset_prepare/`
-- `tools/check_datasets.py`
-- `tools/check_missing_samples.py`
-- `tools/merge_files.py`
-
-Use these when you need to:
-- inspect dataset integrity,
-- merge intermediate files,
-- or convert raw task sources into training/evaluation inputs.
-
-### Evaluation and statistics
-- `tools/cal_acc.py`
-- `tools/calculate_trajectory_accuracy.py`
-- `tools/recalculate_val_score.py`
-- `tools/plot_pass_at_k.py`
-
-Use these when you need to:
-- recompute metrics,
-- compare evaluation outputs,
-- or summarize pass@k style experiment results.
-
-### Experiment comparison and diagnosis
-- `tools/compare_experiments_by_domain.py`
-- `tools/compare_experiments_by_site.py`
-- `tools/find_score_difference.py`
-- `tools/complexity_check.py`
-
-Use these when you need to:
-- compare two runs,
-- break results down by domain/site,
-- or inspect where score gaps come from.
-
-### Trajectory inspection and visualization
-- `tools/visual_trajectory.py`
-- `tools/visual_trajectory.sh`
-- `tools/check_image_trajectory_consistency.py`
-- `tools/trajectory_2_webjudge_eval_data.py`
-
-Use these when you need to:
-- visualize agent trajectories,
-- validate image/trajectory alignment,
-- or convert trajectories into downstream evaluation data.
-
-A number of these scripts were created for internal experimentation and then cleaned up for open-source release. Some may still require:
-- replacing placeholder paths
-- adapting input file formats
-- removing environment-specific assumptions
-- converting hard-coded values to command-line arguments
-
-## Common pitfalls
-
-- **Submodules not initialized**: missing files under `Agent-R1/verl` usually mean `git submodule update --init --recursive` was skipped.
-- **Internal paths in launchers**: several public scripts still include `/mnt/...` paths or placeholders such as `<SAVE_MODEL_PATH>`.
-- **Browser dependencies incomplete**: Playwright alone may not be enough on server environments; system packages are often also required.
-- **Wrong entry path**: `Agent-R1/run_*.sh` and `verl/recipe/webagent_fully_async_policy/...` are not the same workflow.
-- **Resource mismatch**: the async dual-model web-agent recipe assumes a much heavier GPU layout than the upstream toy examples.
-- **Missing private services/data**: some scripts in `tools/online_webagent/` are placeholders because the original internal services are not open-sourced.
-- **Import-path confusion**: several scripts use module paths like `python3 -m agent_r1...`, so your local working directory and package install state matter.
-
-## Open-source release scope and limitations
-
-This public release intentionally excludes or disables several internal-only components, including but not limited to:
-- private service integrations
-- internal credentials or tokens
-- proprietary datasets and private test assets
-- organization-specific deployment scripts
-- internal infrastructure paths and storage layout
-
-Because of that, some scripts or configs in this directory should be read as:
-- **reference implementations**,
-- **examples of experiment structure**, or
-- **starting points for your own adaptation**
-
-rather than turnkey production tools.
-
-## Data, checkpoints, and reproducibility
-
-This repository does **not** include the full set of private data and artifacts used in internal experimentation.
-
-To reproduce or adapt experiments, you may need to prepare your own:
-- environment instances
-- task definitions
-- browser / web backends
-- evaluation datasets
-- model checkpoints
-- service endpoints or local model-serving stack
-
-For public adaptation, a practical workflow is:
-1. verify the training framework on a simpler included / upstream example,
-2. adapt the environment and data interface,
-3. replace internal paths and service assumptions,
-4. add your own reward logic and evaluation setup.
-
-## Configuration and secrets
-
-Use [`.env.example`](./.env.example) as a template for local configuration where needed:
-
-```bash
-cp .env.example .env
-```
-
-The current example file includes placeholders such as:
-- `WEBGW_BASE_URL`
-- `WEBGW_APP_ID`
-- `WEBGW_SECRET`
-- `ONLINE_AGENT_API_URL`
-- `ONLINE_AGENT_API_TOKEN`
-
-Do **not** commit real secrets, private endpoints, tokens, or internal storage paths.
-
-## Related internal / adaptation notes
-
-The file [`Agent-R1/ADAPTATION_PLAN.md`](./Agent-R1/ADAPTATION_PLAN.md) contains project-specific notes about adapting parts of the training stack to another `verl` async architecture. It is useful if you want to understand ongoing or planned engineering migration work, but it is **not** required for first-time users.
-
-## License
-
-This repository is released under the Apache 2.0 License unless otherwise noted.
-
-Please also review:
-- [`../LICENSE`](../LICENSE)
-- [`Agent-R1/LICENSE`](./Agent-R1/LICENSE)
-- licenses from upstream dependencies such as `verl`
-
-## Acknowledgements
-
-This training sub-project builds on the broader open-source agent-RL ecosystem. In particular:
-- the core training framework in `Agent-R1/` builds on ideas and code from the Agent-RL community
-- `verl` is an important upstream dependency for the released training stack
-- additional acknowledgements are documented in [`Agent-R1/README.md`](./Agent-R1/README.md)
-
-## Security
-
-If you discover a credential leak or another security issue in the public release:
-1. rotate the affected secret immediately,
-2. remove the secret from the repository history,
-3. verify that related configs or scripts no longer expose the issue before publishing further updates.
