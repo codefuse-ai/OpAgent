@@ -251,7 +251,7 @@ It includes:
 - WebArena-style browser environments
 - WebJudge-based evaluation
 - a dual-model Planner/Grounder setup
-- a launch script such as `run_grpo_verl06_dual_model_async.sh`
+- a launch script such as `recipe/webagent_fully_async_policy/scripts/visual_webarena/run_grpo_verl06_dual_model_async.sh`
 
 This path is suitable if you want to train a browser agent closer to the main OpAgent research setup.
 
@@ -348,7 +348,7 @@ This is much heavier than the simple upstream example, so you should verify reso
 A practical flow is:
 
 ```bash
-cd Agent-R1/verl
+cd OpAgent/opagent_training/Agent-R1/verl
 export BASE_MODEL="/path/to/model"
 export GROUNDER_MODEL="$BASE_MODEL"
 export DATASET_PATH="/path/to/train"
