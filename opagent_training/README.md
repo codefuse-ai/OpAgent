@@ -9,7 +9,6 @@ This directory contains the **open-source training stack** behind OpAgent's rein
   - [Step 2. Run the OpAgent web-agent async training pipeline](#step-2-run-the-opagent-web-agent-async-training-pipeline)
 - [Common pitfalls](#common-pitfalls)
 - [Open-source release scope and limitations](#open-source-release-scope-and-limitations)
-- [Data, checkpoints, and reproducibility](#data-checkpoints-and-reproducibility)
 - [License](#license)
 
 ## Overview
@@ -129,23 +128,6 @@ Because of that, some scripts or configs in this directory should be read as:
 
 rather than turnkey production tools.
 
-## Data, checkpoints, and reproducibility
-
-This repository does **not** include the full set of private data and artifacts used in internal experimentation.
-
-To reproduce or adapt experiments, you may need to prepare your own:
-- environment instances
-- task definitions
-- browser / web backends
-- evaluation datasets
-- model checkpoints
-- service endpoints or local model-serving stack
-
-For public adaptation, a practical workflow is:
-1. verify the training framework on a simpler included / upstream example,
-2. adapt the environment and data interface,
-3. replace internal paths and service assumptions,
-4. add your own reward logic and evaluation setup.
 
 ## License
 
