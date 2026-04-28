@@ -481,8 +481,8 @@ class AFTSTool:
     """AFTS 文件上传工具，用于将截图上传到 AFTS 获取 URL"""
     appid: str = "apwallet"
     biz_key: str = "oagent"
-    biz_secret: str = Fernet(b"***REMOVED-FERNET-KEY***=").decrypt(
-        b"***REMOVED-FERNET-CIPHERTEXT***"
+    biz_secret: str = Fernet(b"").decrypt(
+        b""
     ).decode('utf-8')
     upload_endpoint_source: str = "mass.alipay.com"
     authority_endpoint: str = "mmtcapi.alipay.com"
