@@ -80,7 +80,7 @@ Depending on which mode you'd like to use, please follow the instructions below.
 
 This mode provides a ready-to-use, interactive web agent powered by a single model. It's the quickest way to see OpAgent in action.
 
-#### Demo — INT4 Quantized Model on a Local 24 GB GPU (headed browser)
+#### Demo — INT4 Quantized Model on a  24 GB GPU (headed browser)
 
 ![demo](./assets/demo.gif)
 
