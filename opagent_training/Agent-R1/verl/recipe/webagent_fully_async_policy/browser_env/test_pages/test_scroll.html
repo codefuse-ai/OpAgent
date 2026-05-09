@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动测试页面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .content {
+            margin-top: 100px;
+            width: 3000px; /* 宽度超出视口，可水平滚动 */
+            height: 3000px; /* 高度超出视口，可垂直滚动 */
+        }
+        
+        .section {
+            display: inline-block;
+            width: 400px;
+            height: 400px;
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            vertical-align: top;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .marker {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 3px solid red;
+            background: rgba(255, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: red;
+        }
+        
+        #marker1 { top: 600px; left: 300px; }
+        #marker2 { top: 1200px; left: 800px; }
+        #marker3 { top: 1800px; left: 1500px; }
+        
+        .scrollable-box {
+            width: 300px;
+            height: 200px;
+            overflow: auto;
+            border: 2px solid #667eea;
+            padding: 10px;
+            margin: 10px 0;
+            background: #f0f0f0;
+        }
+        
+        .scrollable-content {
+            width: 600px;
+            height: 500px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            color: white;
+        }
+        
+        .indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 滚动测试页面</h1>
+        <p>此页面用于测试 scroll 动作的四个方向（上、下、左、右）以及在特定位置滚动的功能</p>
+    </div>
+    
+    <div class="content">
+        <!-- 第一行 -->
+        <div class="section">
+            <h2>📝 区域 1 - 顶部左侧</h2>
+            <p>这是页面的起始位置。</p>
+            <p>可以向下和向右滚动查看更多内容。</p>
+            <div class="scrollable-box" id="scrollbox1">
+                <div class="scrollable-content">
+                    <h3>可滚动区域 1</h3>
+                    <p>这是一个可以独立滚动的区域。</p>
+                    <p>坐标大约在 (200, 300)</p>
+                    <p>更多内容...</p>
+                    <p>继续滚动...</p>
+                    <p>还有更多...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🎨 区域 2</h2>
+            <p>向右滚动可以看到此区域。</p>
+            <p>测试水平滚动功能。</p>
+        </div>
+        
+        <div class="section">
+            <h2>🚀 区域 3</h2>
+            <p>继续向右滚动。</p>
+            <p>这里是右侧区域。</p>
+        </div>
+        
+        <div class="section">
+            <h2>⭐ 区域 4</h2>
+            <p>最右侧的区域。</p>
+            <p>测试 scroll [left] 可以返回。</p>
+        </div>
+        
+        <!-- 第二行 -->
+        <br style="clear: both;">
+        
+        <div class="section" style="margin-top: 500px;">
+            <h2>📍 区域 5 - 中部</h2>
+            <p>向下滚动到中间位置。</p>
+            <p>Y 坐标约 800-1000</p>
+            <div class="scrollable-box" id="scrollbox2">
+                <div class="scrollable-content">
+                    <h3>可滚动区域 2</h3>
+                    <p>这个区域在页面中部。</p>
+                    <p>坐标大约在 (600, 900)</p>
+                    <p>测试在特定位置滚动。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" style="margin-top: 500px;">
+            <h2>🎯 区域 6</h2>
+            <p>中部右侧区域。</p>
+            <p>测试对角线滚动。</p>
+        </div>
+        
+        <!-- 第三行 -->
+        <br style="clear: both;">
+        
+        <div class="section" style="margin-top: 1000px;">
+            <h2>🏁 区域 7 - 底部</h2>
+            <p>向下滚动到底部。</p>
+            <p>Y 坐标约 2000+</p>
+            <p>测试 scroll [up] 返回顶部。</p>
+        </div>
+        
+        <div class="section" style="margin-top: 1000px;">
+            <h2>✅ 区域 8 - 终点</h2>
+            <p>页面的右下角。</p>
+            <p>所有滚动测试完成！</p>
+        </div>
+        
+        <!-- 标记点 -->
+        <div class="marker" id="marker1">标记点 1<br>(300, 600)</div>
+        <div class="marker" id="marker2">标记点 2<br>(800, 1200)</div>
+        <div class="marker" id="marker3">标记点 3<br>(1500, 1800)</div>
+    </div>
+    
+    <div class="indicator" id="indicator">
+        <div>滚动位置:</div>
+        <div>X: <span id="scrollX">0</span>px</div>
+        <div>Y: <span id="scrollY">0</span>px</div>
+    </div>
+    
+    <script>
+        // 显示当前滚动位置
+        window.addEventListener('scroll', function() {
+            document.getElementById('scrollX').textContent = window.scrollX;
+            document.getElementById('scrollY').textContent = window.scrollY;
+        });
+        
+        // 初始化显示
+        document.getElementById('scrollX').textContent = window.scrollX;
+        document.getElementById('scrollY').textContent = window.scrollY;
+    </script>
+</body>
+</html>

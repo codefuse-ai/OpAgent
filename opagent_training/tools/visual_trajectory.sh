@@ -1,0 +1,76 @@
+export VLM_EXP_DEBUG=${VLM_EXP_DEBUG:-1}
+export DIST_WEBBROWSER=${DIST_WEBBROWSER:-0}
+export VERL_LOGGING_LEVEL=${VERL_LOGGING_LEVEL:-INFO}
+TASK_ID="test_debug"
+export TASK_ID=$TASK_ID
+export NUM_BROWSERS=${NUM_BROWSERS:-8}
+
+# --- 基础配置 ---
+export VLLM_USE_V1=0
+export VLLM_ATTENTION_BACKEND=${VLLM_ATTENTION_BACKEND:-XFORMERS}
+export WANDB_MODE=${WANDB_MODE:-offline}
+export HYDRA_FULL_ERROR=${HYDRA_FULL_ERROR:-1}
+export PW_TEST_SCREENSHOT_NO_FONTS_READY=${PW_TEST_SCREENSHOT_NO_FONTS_READY:-1}
+
+export OBSERVATION_TYPE=${OBSERVATION_TYPE:-"image"}
+# --- 模型和项目路径 ---
+# 使用单引号以确保路径中的特殊字符被正确处理
+#export BASE_MODEL=${BASE_MODEL:-'<BASE_MODEL_PATH_EXAMPLE>'}
+export BASE_MODEL=${BASE_MODEL:-'<BASE_MODEL_PATH>'}
+#export BASE_MODEL=${BASE_MODEL:-'<BASE_MODEL_PATH_EXAMPLE_2>'}
+# 这是一个被注释掉的备用模型路径，保留以供参考
+# export BASE_MODEL=${BASE_MODEL:-'<BASE_MODEL_PATH_EXAMPLE>'}
+export PROJECT_NAME=${PROJECT_NAME:-'hotpotqa_qwen2.5-vl-3b-instruct'}
+export EXPERIMENT_NAME=${EXPERIMENT_NAME:-"JudgewoAnswer_wRewardMask_klcov"}
+
+export VLM_ONLINERL_EXP_NAME=${VLM_ONLINERL_EXP_NAME:-""} #WithStepScore
+export WEBARENA_AUTH_PATH=${WEBARENA_AUTH_PATH:-"<WEBARENA_AUTH_PATH>"}
+
+# --- 新增配置：轨迹保存频率 ---
+# TRAJECTORY_SAVE_FREQ: 控制每多少步保存一次轨迹数据，默认每20步
+# TRAJECTORY_SAVE_ENABLED: 是否启用轨迹保存功能，默认启用
+export TRAJECTORY_SAVE_FREQ=${TRAJECTORY_SAVE_FREQ:-1}  # 每20步保存一次
+export TRAJECTORY_SAVE_ENABLED=${TRAJECTORY_SAVE_ENABLED:-true}  # 是否启用轨迹保存
+#export DATASET_PATH=${DATASET_PATH:-"<WEBARENA_AUTH_PATH>/webarena_selfcollect_webjudge0731/"}
+#export DATASET_PATH=${DATASET_PATH:-"<WEBARENA_AUTH_PATH>/test_webarena"}
+#export DATASET_PATH=${DATASET_PATH:-"<WEBARENA_AUTH_PATH>/webarena_selfcollect_webjudge0819/"}
+#export DATASET_PATH=${DATASET_PATH:-"<DATASET_PATH_EXAMPLE_4>"}
+#export DATASET_PATH=${DATASET_PATH:-"<DATASET_PATH_EXAMPLE_5>"}
+export DATASET_PATH=${DATASET_PATH:-"<DATASET_PATH>"}
+#<DATASET_PATH_EXAMPLE_6>
+export SAVE_MODEL_PATH=${SAVE_MODEL_PATH:-"<SAVE_MODEL_PATH>"}
+# --- WebArena & 网络代理配置 ---
+# 首先为 WEBHOSTNAME 设置默认值
+#export WEBHOSTNAME=${WEBHOSTNAME:-"http://ec2-18-190-118-49.us-east-2.compute.amazonaws.com"}
+export WEBHOSTNAME=${WEBHOSTNAME:-"<WEBHOSTNAME>"}
+# 然后设置依赖于 WEBHOSTNAME 的其他变量
+# 使用双引号以允许 ${WEBHOSTNAME} 被正确展开
+export SHOPPING=${SHOPPING:-"${WEBHOSTNAME}:7770"}
+export SHOPPING_ADMIN=${SHOPPING_ADMIN:-"${WEBHOSTNAME}:7780/admin"}
+export REDDIT=${REDDIT:-"${WEBHOSTNAME}:9999"}
+export GITLAB=${GITLAB:-"${WEBHOSTNAME}:8023"}
+export MAP=${MAP:-"${WEBHOSTNAME}:3000"}
+export WIKIPEDIA=${WIKIPEDIA:-"${WEBHOSTNAME}:8888/wikipedia_en_all_maxi_2022-05/A/User:The_other_Kiwix_guy/Landing"}
+export HOMEPAGE=${HOMEPAGE:-"${WEBHOSTNAME}:4399"} # this is a placeholder
+
+export DATASET=${DATASET:-"webarena"}
+
+# 代理设置
+export WEBARENA_PROXY=${WEBARENA_PROXY:-"<HTTP_PROXY_HOST:PORT>"}
+export HTTPS_PROXY=${HTTPS_PROXY:-"<HTTP_PROXY_HOST:PORT>"}
+export HTTP_PROXY=${HTTP_PROXY:-"<HTTP_PROXY_HOST:PORT>"}
+export no_proxy="localhost,127.0.0.1,${no_proxy}"
+
+
+export PYTHONPATH="<VERL_PYTHONPATH>"
+export CUDA_VISIBLE_DEVICES=0,1 #,2,3 #,4,5,6,7 #,2,3 #,4,5,6,7
+export BATCH_SIZE=${BATCH_SIZE:-2}
+export NUM_NODES=${NUM_NODES:-1}
+export GPUS_PER_NODE=${GPUS_PER_NODE:-$BATCH_SIZE}
+export SLOW_MO=${SLOW_MO:-0}
+export ACTION_EXECUTE_MODE=${ACTION_EXECUTE_MODE:-"playwright_api"}
+export PLAYWRIGHT_BROWSERS_PATH=${PLAYWRIGHT_BROWSERS_PATH:-"/root/.cache/ms-playwright"}
+export MAX_CONCURRENT_WORKERS=${MAX_CONCURRENT_WORKERS:-32}
+export DATA_SFUFFLE=${DATA_SFUFFLE:-True}
+export TENSORBOARD_DIR=${TENSORBOARD_DIR:-"<TENSORBOARD_DIR>"}
+python3 visual_trajectory.py

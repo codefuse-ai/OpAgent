@@ -21,7 +21,7 @@
 
 </p>
 
-`OpAgent` is a powerful agentic framework designed for autonomous web navigation and operation. It comes in two primary modes to suit different use cases: a full-featured **Agentic Framework** for state-of-the-art performance, and a streamlined **Single-Model Mode** for ease of use and quick deployment.
+`OpAgent` is a powerful agentic framework designed for autonomous web navigation and operation. It now includes three complementary parts: a full-featured **Agentic Framework** for state-of-the-art performance, a streamlined **Single-Model Mode** for ease of use and quick deployment, and a newly released **Multi-Agent RL Training Framework** for agent training research and experimentation.
 
 ## Contents
 - [News](#news)
@@ -29,12 +29,17 @@
 - [Performance Highlights](#performance-highlights)
 - [Getting Started](#getting-started)
 - [Detailed Introduction: The Agentic Framework](#detailed-introduction-the-agentic-framework)
-  - [Framework Architecture](#1-framework-architecture)
+  - [Framework Architecture](#1-framework)
   - [Key Modules](#2-key-modules)
   - [Prompt System](#3-prompt-system)
+  - [Key Features](#4-key-features)
+- [Multi-Agent RL Training Framework](#multi-agent-rl-training-framework)
 - [Citation](#citation)
 
 ## News
+🔥🔥🔥 **[2026/04/24]** We have open-sourced our **multi-agent RL training framework** under [`opagent_training/`](./opagent_training/), covering training code, environment preparation helpers, and analysis/evaluation utilities.
+➡️ **[Go to the Multi-Agent RL Training Guide For Details](./opagent_training/README.md)** ⬅️
+
 🔥🔥🔥 **[2026/03/17]** We have released the demo on [HuggingFace](https://huggingface.co/spaces/exias/OpAgent) and [ModelScope](https://modelscope.cn/studios/codefuse-ai/OpAgent-32B-Q4-Demo). We invite everyone to try it out and share your feedback!
 
 🔥🔥🔥 **[2026/03/17]** We have released the INT4-quantized version of the OpAgent-32B model, enabling efficient deployment on consumer-grade hardware with 24GB of VRAM. 
@@ -46,7 +51,7 @@
 
 ## Overview
 
-This repository provides the code and models for `OpAgent`, an operator agent for web navigation. We offer two distinct modes:
+This repository provides the code and models for `OpAgent`, an operator agent for web navigation. We offer three complementary parts:
 
 1.  **OpAgent: Single-Model Mode** (`opagent_single_model/` directory)
     *   A simplified, end-to-end approach where a single, powerful Vision-Language Model (VLM) directly performs web navigation tasks.
@@ -58,6 +63,10 @@ This repository provides the code and models for `OpAgent`, an operator agent fo
     *   This architecture enables sophisticated reasoning, robust error recovery, and self-correction, achieving top-tier performance on complex, long-horizon web tasks.
     *   Ideal for researchers and users seeking maximum performance and a deep dive into agentic AI architectures.
 
+3.  **OpAgent: Multi-Agent RL Training Framework** (`opagent_training/` directory)
+    *   A newly released training stack for reinforcement learning on web-style / tool-using agents, including the `Agent-R1` training codebase, environment preparation helpers, and analysis/evaluation utilities.
+    *   Designed for researchers and engineers who want to reproduce, extend, or adapt our training workflow to their own environments and agent setups.
+    *   For detailed setup and usage guidance, please refer to [`opagent_training/README.md`](./opagent_training/README.md).
 
 
 ## Performance Highlights
@@ -74,7 +83,7 @@ Our full agentic framework, OpAgent, achieves a state-of-the-art (SOTA) **71.6%*
 
 ## Getting Started
 
-Depending on which mode you'd like to use, please follow the instructions below.
+Depending on which part you'd like to use, please follow the instructions below.
 
 ### 🚀 Mode 1: Single-Model Mode (`opagent_single_model/`)
 
@@ -110,6 +119,15 @@ The core logic is implemented in the `./opagent/` directory, with evaluation scr
 ```
 [**(Learn more about the Agentic Framework's architecture below)↓**](#detailed-introduction-the-agentic-framework)
 
+---
+
+### 🚀 Mode 3: Multi-Agent RL Training Framework (`opagent_training/`)
+
+This module contains our newly open-sourced **multi-agent RL training framework** for web-style agents.
+
+**For detailed setup, environment preparation, and training workflow, please refer to the README in the `opagent_training` directory:**
+
+➡️ **[Go to Multi-Agent RL Training Guide](./opagent_training/README.md)** ⬅️
 
 
 ## Detailed Introduction: The Agentic Framework
@@ -191,6 +209,13 @@ The framework defines four core Prompt templates guiding different Agent roles:
     *   JS fallback mechanism for `select_option` (when Playwright standard selection fails).
     *   Automatic retry mechanism.
 *   **Multimodal Support**: Core logic relies heavily on VLM (Visual Language Models) to process webpage visual elements.
+
+## Multi-Agent RL Training Framework
+
+Alongside inference and evaluation, this repository now includes a dedicated sub-project for **multi-agent RL training** under [`opagent_training/`](./opagent_training/).
+
+For detailed setup and usage guidance, see [`opagent_training/README.md`](./opagent_training/README.md).
+
 ## Citation
 
 If you use OpAgent in your research or project, please cite it as follows:
