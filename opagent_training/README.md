@@ -7,6 +7,7 @@ This directory contains the **open-source training stack** behind OpAgent's rein
 - [Detailed usage workflow](#detailed-usage-workflow)
   - [Step 1. Prepare the environment](#step-1-prepare-the-environment)
   - [Step 2. Run the OpAgent web-agent async training pipeline](#step-2-run-the-opagent-web-agent-async-training-pipeline)
+  - [Step 3. Run evaluation on WebArena](#step-3-run-evaluation-on-webarena)
 - [Common pitfalls](#common-pitfalls)
 - [Open-source release scope and limitations](#open-source-release-scope-and-limitations)
 - [License](#license)
@@ -103,6 +104,108 @@ export GPUS_PER_NODE=8
 export NUM_NODES=1
 bash recipe/webagent_fully_async_policy/scripts/visual_webarena/run_grpo_verl06_dual_model_async.sh
 ```
+
+
+## Step 3. Run evaluation on WebArena
+
+The evaluation code lives under [`Agent-R1/eval/`](./Agent-R1/eval/) and runs the Reflector-Planner-Grounder-Summary multi-agent architecture on WebArena tasks.
+
+### Architecture
+
+```
+User Intent + Start URL
+        |
+        v
++---------------------------------------------+
+|  Reflector: Check task completion, record    |
+|             key information                  |
+|      | is_task_done=false                    |
+|  Planner: Generate next action instruction   |
+|      | action_type + instruction             |
+|  Grounder: Locate coordinates (click/type/   |
+|             hover/scroll/etc.)               |
+|      | coords                                |
+|  Browser Action: Execute browser operation   |
+|      | screenshot + page state               |
+|  -> Back to Reflector                        |
+|      | is_task_done=true                     |
+|  Summary: Generate final answer              |
++---------------------------------------------+
+        |
+        v
+  Evaluator: Score against reference answers
+```
+
+### Files
+
+| File | Description |
+|------|-------------|
+| `Agent-R1/eval/run_local_agent_eval.sh` | Shell launch script — configures environment variables and starts evaluation |
+| `Agent-R1/eval/local_agent_eval.py` | Main evaluation script — multi-agent loop + scoring |
+| `Agent-R1/eval/prompts.py` | Universal prompt templates + site-specific expert tips for 5 websites |
+| `Agent-R1/eval/README.md` | Detailed evaluation documentation |
+
+### Quick start
+
+```bash
+cd Agent-R1
+
+# Minimal usage (configure models via environment variables)
+REASONING_MODEL=qwen2.5-vl-72b \
+REASONING_BASE_URL=http://localhost:8000/v1 \
+GROUNDER_MODEL=qwen2.5-vl-72b \
+GROUNDER_BASE_URL=http://localhost:8001/v1 \
+WEBHOSTNAME=http://YOUR_ECS_IP \
+bash eval/run_local_agent_eval.sh
+```
+
+Or invoke Python directly:
+
+```bash
+python eval/local_agent_eval.py \
+    --dataset-path ./config_files \
+    --output-dir ./output \
+    --reasoning-model qwen2.5-vl-72b \
+    --reasoning-base-url http://localhost:8000/v1 \
+    --grounder-model qwen2.5-vl-72b \
+    --grounder-base-url http://localhost:8001/v1 \
+    --webhostname http://YOUR_ECS_IP
+```
+
+### Key environment variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `REASONING_MODEL` | `qwen2.5-vl-72b` | Model used by Reflector/Planner/Summary |
+| `REASONING_BASE_URL` | `http://localhost:8000/v1` | Reasoning model API endpoint |
+| `GROUNDER_MODEL` | `qwen2.5-vl-72b` | Grounder coordinate-grounding model |
+| `GROUNDER_BASE_URL` | `http://localhost:8000/v1` | Grounder model API endpoint |
+| `WEBHOSTNAME` | `http://localhost` | WebArena website host address |
+| `ECS_SSH_USERNAME` | `root` | SSH username for ECS instances |
+| `MAX_STEPS` | `50` | Maximum execution steps per task |
+| `NUM_ECS` | `5` | Number of ECS instances to use |
+| `VLM_EXP_DEBUG` | `1` | Set to `0` to enable SSH web environment refresh |
+
+### Site-specific expert tips
+
+`prompts.py` provides `get_domain_specific_tips()` which automatically injects site-specific strategies based on the current page URL:
+
+| Port | Site | Key Tips |
+|------|------|----------|
+| `:3000` | OpenStreetMap | Search strategy, directions feature, coordinate extraction, address format, zoom operations |
+| `:8023` | GitLab | URL-first strategy, Issue/MR operations, SSH clone, cross-site Reddit queries |
+| `:9999` | Reddit | Forum navigation, comment viewing, post editing, cross-site GitLab links |
+| `:7770` | Shopping | Product category hierarchy (76 categories), order operations, review viewing, refunds |
+| `:7780` | Adobe Commerce Admin | Backend navigation paths, report workflows, date format, data completeness rules |
+
+### Notes
+
+- Model APIs must be compatible with the OpenAI Chat Completions format and support multimodal (image) input.
+- The Grounder model needs coordinate output capability (SFT-finetuned models work best).
+- To enable WebJudge fallback evaluation, set `REWARD_COEFF=1`.
+- Evaluation supports resume: tasks with an existing `trajectory.json` are automatically skipped.
+- Requires Python 3.10+ (the `opagent` evaluation harness uses `match/case` syntax).
+- See [`Agent-R1/eval/README.md`](./Agent-R1/eval/README.md) for full documentation.
 
 
 ## Common pitfalls
