@@ -34,9 +34,13 @@
   - [Prompt System](#3-prompt-system)
   - [Key Features](#4-key-features)
 - [Multi-Agent RL Training Framework](#multi-agent-rl-training-framework)
+- [OpAgent Web Benchmark](#opagent-web-benchmark)
 - [Citation](#citation)
 
 ## News
+🔥🔥🔥 **[2026/09/14]** We have released the **OpAgent Web Benchmark** — a 665-case benchmark on mock websites (READ 573 + OPERATION 92), together with browser_use evaluation results across 8 models.
+➡️ **[Go to the OpAgent Web Benchmark directory for details](./opagent_web_benchmark/)** ⬅️
+
 🔥🔥🔥 **[2026/04/24]** We have open-sourced our **multi-agent RL training framework** under [`opagent_training/`](./opagent_training/), covering training code, environment preparation helpers, and analysis/evaluation utilities.
 ➡️ **[Go to the Multi-Agent RL Training Guide For Details](./opagent_training/README.md)** ⬅️
 
@@ -215,6 +219,23 @@ The framework defines four core Prompt templates guiding different Agent roles:
 Alongside inference and evaluation, this repository now includes a dedicated sub-project for **multi-agent RL training** under [`opagent_training/`](./opagent_training/).
 
 For detailed setup and usage guidance, see [`opagent_training/README.md`](./opagent_training/README.md).
+
+## OpAgent Web Benchmark
+
+We release a **665-case web agent benchmark** on self-contained mock websites (READ 573 + OPERATION 92, 71 mock sites), together with **browser_use evaluation results for 8 models** under a unified protocol (READ = LLM semantic judge, OPERATION = deterministic frontend state assertions).
+
+| Rank | Model | READ (573) | OP (92) | Overall (665) |
+|---|---|---|---|---|
+| 1 | Kimi-K3 | 79.8% | 82.6% | **80.2%** |
+| 2 | MiniMax-M3 | 79.1% | 80.4% | **79.2%** |
+| 3 | Qwen3.5-397B-A17B | 77.1% | 71.7% | **76.4%** |
+| 4 | Qwen3.5-27B | 76.6% | 73.9% | **76.2%** |
+| 5 | GLM-5.2 (text-only DOM) | 74.2% | 71.7% | **73.8%** |
+| 6 | Kimi-K2.5 | 71.2% | 71.7% | **71.3%** |
+| 7 | Qwen3-VL-235B | 69.5% | 65.2% | **68.9%** |
+| 8 | DeepSeek-V4-Pro | 67.2% | 63.0% | **66.6%** |
+
+For the dataset, per-model results and judging protocol, see [`opagent_web_benchmark/`](./opagent_web_benchmark/).
 
 ## Citation
 
