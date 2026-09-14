@@ -37,6 +37,9 @@
 - [Citation](#citation)
 
 ## News
+🔥🔥🔥 **[2026/09/14]** We have released the **OpAgent Web Benchmark** — a 665-case benchmark on mock websites (READ 573 + OPERATION 92), together with browser_use evaluation results across 8 models.
+➡️ **[Go to the OpAgent Web Benchmark directory for details](./opagent_web_benchmark/)** ⬅️
+
 🔥🔥🔥 **[2026/04/24]** We have open-sourced our **multi-agent RL training framework** under [`opagent_training/`](./opagent_training/), covering training code, environment preparation helpers, and analysis/evaluation utilities.
 ➡️ **[Go to the Multi-Agent RL Training Guide For Details](./opagent_training/README.md)** ⬅️
 
